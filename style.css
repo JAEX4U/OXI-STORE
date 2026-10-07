@@ -294,6 +294,33 @@ body {
     font-weight: 700;
     cursor: pointer;
 }
+/* Key Quantity Selector */
+.key-selector {
+    text-align: left;
+    margin: 10px 0 15px;
+}
+
+.key-selector label {
+    display: block;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-bottom: 5px;
+}
+
+.key-selector input {
+    width: 100%;
+    padding: 8px 12px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.key-selector input:focus {
+    outline: none;
+    border-color: #38bdf8;
+}
 
 #submitBtn:hover {
     background: #16a34a;
