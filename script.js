@@ -1,4 +1,5 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby7TUSTxFgYqAGKLz3KT2gyxY7_MRvbpsMqrSB5_joxbd-eVsm85exnfN8TuOGrdsLZfg/exec";
+// Replace with your live hosted backend URL (e.g. from Render or Koyeb)
+const API_URL = "https://your-backend-server.onrender.com/api/orders";
 
 document.getElementById('payForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -13,20 +14,26 @@ document.getElementById('payForm').addEventListener('submit', function(e) {
     msg.style.color = "#ffaa00";
     msg.innerText = "Logging order...";
 
-    fetch(SCRIPT_URL, {
+    fetch(API_URL, {
         method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({
-            action: "NEW_ORDER",
             username: username,
             utr: utr,
             item: "VIP Rank"
         })
     })
-    .then(res => res.text())
+    .then(res => res.json())
     .then(data => {
-        msg.style.color = "#55ff55";
-        msg.innerText = "Order submitted! Processing payment once bank SMS is received.";
-        document.getElementById('payForm').reset();
+        if (data.success) {
+            msg.style.color = "#55ff55";
+            msg.innerText = "Order submitted! Waiting for admin payment verification.";
+            document.getElementById('payForm').reset();
+        } else {
+            throw new Error(data.error);
+        }
     })
     .catch(error => {
         msg.style.color = "#ff5555";
@@ -35,6 +42,6 @@ document.getElementById('payForm').addEventListener('submit', function(e) {
     })
     .finally(() => {
         btn.disabled = false;
-        btn.innerText = "Submit Payment";
+        btn.innerText = "I Have Paid";
     });
 });
