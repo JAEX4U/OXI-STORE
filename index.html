@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIOXIDE SMP STORE</title>
+    <title>Minecraft Server Store</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <h1>Server Webstore</h1>
-    <p>Scan the QR code to pay, then enter your details below for automatic delivery.</p>
+    <p>Scan the QR code to pay, then enter your details below for manual approval.</p>
 
     <div class="store-container">
         <div class="card">
@@ -17,15 +17,14 @@
             <div class="account-name">Payee: JOYDEEP HEMBRAM</div>
             <p class="price">₹100</p>
             
-            <!-- Directly linking your ImgBB image -->
             <img src="https://i.ibb.co/G3dzfN90/1000101649.jpg" alt="UPI QR Code" class="qr-img">
             
-            <div class="upi-id">UPI: oxideind@nyes</div>
+            <div class="upi-id">UPI: 9635262759@nyes</div>
 
             <form id="payForm">
                 <input type="text" id="username" placeholder="Minecraft Username" required>
-                <input type="text" id="utr" placeholder="12-Digit UTR Number" pattern="[0-9]{12}" maxlength="12" title="Must be exactly 12 digits" required>
-                <button type="submit" id="submitBtn">Submit Payment</button>
+                <input type="text" id="utr" placeholder="12-Digit UTR / Transaction ID" maxlength="20">
+                <button type="submit" id="submitBtn">I Have Paid</button>
             </form>
 
             <p id="status-msg"></p>
