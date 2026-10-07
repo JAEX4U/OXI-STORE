@@ -5,32 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecraft Server Store</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div class="store-card">
-    <h2>Server Store</h2>
-    <p>Scan QR to pay via UPI</p>
-    
-    <!-- Updated with your hosted ImgBB QR code image -->
-    <img src="https://i.ibb.co/G3dzfN90/1000101649.jpg" alt="UPI QR Code" class="qr-image">
-    
-    <form id="payForm">
-        <select id="item" required>
-            <option value="VIP Rank">VIP Rank - ₹100</option>
-            <option value="MVP Rank">MVP Rank - ₹250</option>
-            <option value="5x Crate Keys">5x Crate Keys - ₹50</option>
-        </select>
-        
-        <input type="text" id="username" placeholder="Minecraft Username" required>
-        <input type="text" id="utr" placeholder="12-digit UTR Number" pattern="[0-9]{12}" title="Must be a 12-digit numeric UTR" required>
-        
-        <button type="submit" id="submitBtn">Submit Payment Log</button>
-    </form>
+    <!-- Header / Branding -->
+    <header class="navbar">
+        <div class="logo">⚡ MINECRAFT STORE</div>
+        <div class="server-ip" onclick="copyIP()">PLAY.YOURSERVER.COM</div>
+    </header>
 
-    <p id="msg"></p>
-</div>
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Upgrade Your In-Game Experience</h1>
+            <p>Select your rank or crate key package, pay via UPI, and submit your UTR for manual verification.</p>
+        </section>
 
-<script src="script.js"></script>
+        <!-- Category Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('ranks')">Ranks</button>
+            <button class="tab-btn" onclick="switchTab('keys')">Crate Keys</button>
+        </div>
+
+        <!-- Store Grid: Ranks Section -->
+        <div id="ranks" class="store-grid active-content">
+            <!-- Rank 1 -->
+            <div class="product-card">
+                <span class="badge">Popular</span>
+                <h3>OXi</h3>
+                <div class="price">₹100</div>
+                <ul class="features">
+                    <li>Basic Rank Perks</li>
+                    <li>/fly in Claim</li>
+                    <li>2x Vault Access</li>
+                </ul>
+                <button class="buy-btn" onclick="openCheckout('OXi', '100')">Purchase</button>
+            </div>
+
+            <!-- Rank 2 -->
+            <div class="product-card featured">
+                <span class="badge highlight">Best Value</span>
+                <h3>OXii+</h3>
+                <div class="price">₹250</div>
+                <ul class="features">
+                    <li>All OXi Perks</li>
+                    <li>/fly Everywhere</li>
+                    <li>5x Vault Access</li>
+                    <li>Custom Chat Tag</li>
+                </ul>
+                <button class="buy-btn" onclick="openCheckout('OXii+', '250')">Purchase</button>
+            </div>
+
+            <!-- Rank 3 -->
+            <div class="product-card">
+                <span class="badge">Ultimate</span>
+                <h3>OXiii++</h3>
+                <div class="price">₹500</div>
+                <ul class="features">
+                    <li>All OXii+ Perks</li>
+                    <li>Priority Queue</li>
+                    <li>10x Vault Access</li>
+                    <li>Exclusive Cosmetics</li>
+                </ul>
+                <button class="buy-btn" onclick="openCheckout('OXiii++', '500')">Purchase</button>
+            </div>
+        </div>
+
+        <!-- Store Grid: Crate Keys Section -->
+        <div id="keys" class="store-grid">
+            <div class="product-card">
+                <h3>Crate Key Package</h3>
+                <div class="price">₹150</div>
+                <p class="subtitle">Includes 5 Tiers of Crate Keys:</p>
+                <ul class="features keys-list">
+                    <li><span class="key common">Common</span> x5</li>
+                    <li><span class="key rare">Rare</span> x3</li>
+                    <li><span class="key legendary">Legendary</span> x2</li>
+                    <li><span class="key mythic">Mythic</span> x1</li>
+                    <li><span class="key colossal">Colossal</span> x1</li>
+                </ul>
+                <button class="buy-btn" onclick="openCheckout('KEY Package (Common to Colossal)', '150')">Purchase</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Payment Modal Window -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCheckout()">&times;</span>
+            <h2>Complete Payment</h2>
+            <p id="modalItemTitle">Item: -</p>
+            
+            <img src="https://i.ibb.co/G3dzfN90/1000101649.jpg" alt="UPI QR Code" class="qr-image">
+            <p class="qr-sub">Scan using any UPI app (GPay, PhonePe, Paytm)</p>
+
+            <form id="payForm">
+                <input type="hidden" id="selectedItem">
+                
+                <div class="form-group">
+                    <label for="username">Minecraft Username</label>
+                    <input type="text" id="username" placeholder="e.g. Steve_Gamer" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="utr">12-Digit UTR / Transaction ID</label>
+                    <input type="text" id="utr" placeholder="12-digit UTR number" pattern="[0-9]{12}" title="Must be exactly 12 numeric digits" required>
+                </div>
+
+                <button type="submit" id="submitBtn">Submit Payment Log</button>
+            </form>
+
+            <p id="msg"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
