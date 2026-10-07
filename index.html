@@ -8,29 +8,29 @@
 </head>
 <body>
 
-    <h1>Server Webstore</h1>
-    <p>Scan the QR code to pay, then enter your details below for manual approval.</p>
+<div class="store-card">
+    <h2>Server Store</h2>
+    <p>Scan QR to pay via UPI</p>
+    
+    <!-- Updated with your hosted ImgBB QR code image -->
+    <img src="https://i.ibb.co/G3dzfN90/1000101649.jpg" alt="UPI QR Code" class="qr-image">
+    
+    <form id="payForm">
+        <select id="item" required>
+            <option value="VIP Rank">VIP Rank - ₹100</option>
+            <option value="MVP Rank">MVP Rank - ₹250</option>
+            <option value="5x Crate Keys">5x Crate Keys - ₹50</option>
+        </select>
+        
+        <input type="text" id="username" placeholder="Minecraft Username" required>
+        <input type="text" id="utr" placeholder="12-digit UTR Number" pattern="[0-9]{12}" title="Must be a 12-digit numeric UTR" required>
+        
+        <button type="submit" id="submitBtn">Submit Payment Log</button>
+    </form>
 
-    <div class="store-container">
-        <div class="card">
-            <h3>VIP Rank</h3>
-            <div class="account-name">Payee: JOYDEEP HEMBRAM</div>
-            <p class="price">₹100</p>
-            
-            <img src="https://i.ibb.co/G3dzfN90/1000101649.jpg" alt="UPI QR Code" class="qr-img">
-            
-            <div class="upi-id">UPI: 9635262759@nyes</div>
+    <p id="msg"></p>
+</div>
 
-            <form id="payForm">
-                <input type="text" id="username" placeholder="Minecraft Username" required>
-                <input type="text" id="utr" placeholder="12-Digit UTR / Transaction ID" maxlength="20">
-                <button type="submit" id="submitBtn">I Have Paid</button>
-            </form>
-
-            <p id="status-msg"></p>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
