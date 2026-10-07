@@ -1,125 +1,50 @@
-* { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
 }
-
-body { 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    background-color: #121212; 
-    color: #ffffff; 
-    text-align: center; 
-    padding: 20px; 
+.store-card {
+    background-color: #1e1e1e;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    width: 320px;
+    text-align: center;
 }
-
-h1 { 
-    margin-bottom: 10px; 
-    color: #55ff55; 
+.qr-image {
+    width: 180px;
+    height: 180px;
+    margin: 15px 0;
+    border-radius: 5px;
 }
-
-p { 
-    color: #aaaaaa; 
-    margin-bottom: 20px; 
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #333;
+    box-sizing: border-box;
 }
-
-.store-container { 
-    display: flex; 
-    justify-content: center; 
-    gap: 20px; 
-    flex-wrap: wrap; 
-    margin-top: 20px; 
+input, select {
+    background-color: #2b2b2b;
+    color: #fff;
 }
-
-.card { 
-    background: #1e1e1e; 
-    border: 1px solid #333; 
-    border-radius: 10px; 
-    padding: 20px; 
-    width: 320px; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
+button {
+    background-color: #55ff55;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
 }
-
-.card h3 { 
-    font-size: 22px; 
-    color: #fff; 
-    margin-bottom: 5px; 
+button:hover {
+    background-color: #44cc44;
 }
-
-.card .account-name { 
-    color: #aaa; 
-    font-size: 14px; 
-    margin-bottom: 10px; 
-}
-
-.card .price { 
-    font-size: 20px; 
-    color: #ffaa00; 
-    font-weight: bold; 
-    margin-bottom: 15px; 
-}
-
-.qr-img { 
-    width: 220px; 
-    height: auto; 
-    border-radius: 8px; 
-    margin-bottom: 15px; 
-    border: 2px solid #333; 
-    background: #fff; 
-    padding: 5px; 
-}
-
-.upi-id { 
-    background: #2a2a2a; 
-    padding: 8px 12px; 
-    border-radius: 5px; 
-    font-size: 14px; 
-    font-weight: bold; 
-    color: #55ffff; 
-    margin-bottom: 15px; 
-    display: inline-block; 
-    word-break: break-all; 
-}
-
-form { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 10px; 
-}
-
-input { 
-    padding: 12px; 
-    background: #2a2a2a; 
-    border: 1px solid #444; 
-    border-radius: 5px; 
-    color: #fff; 
-    outline: none; 
-    font-size: 14px; 
-}
-
-input:focus { 
-    border-color: #55ff55; 
-}
-
-button { 
-    padding: 12px; 
-    background: #55ff55; 
-    color: #000; 
-    font-weight: bold; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    transition: 0.2s; 
-    font-size: 15px; 
-}
-
-button:hover { 
-    background: #33cc33; 
-}
-
-#status-msg { 
-    margin-top: 15px; 
-    font-size: 14px; 
-    font-weight: bold; 
-    color: #ffaa00; 
-    line-height: 1.4; 
+#msg {
+    margin-top: 15px;
+    font-size: 14px;
 }
