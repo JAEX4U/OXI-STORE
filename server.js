@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(cors());
 
 // Connect to MongoDB Atlas
-const MONGO_URI = "mongodb+srv://<Spin>:<Hvm8S5dR6bhTAub9>@cluster0.py1moya.mongodb.net/?appName=Cluster0";
+const MONGO_URI = "mongodb+srv://Spin:Hvm8S5dR6bhTAub9@cluster0.py1moya.mongodb.net/?appName=Cluster0";
 mongoose.connect(MONGO_URI)
   .then(() => console.log("Connected to MongoDB!"))
   .catch(err => console.error("MongoDB connection error:", err));
