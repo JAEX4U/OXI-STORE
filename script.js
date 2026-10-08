@@ -1,5 +1,11 @@
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUKKj6Hr8xAHyX42avjCDvzL6lYXDUZ-z0lJoytW1_O6dJs_3Cus8WcE0EV1jIcBf0Cw/exec";
 
+// Cart storage in localStorage
+let cart = JSON.parse(localStorage.getItem('storeCart')) || [];
+
+// Initialize cart on page load
+window.addEventListener('load', updateCartUI);
+
 // Switch between Ranks and Crate Keys tabs
 function switchTab(tabName) {
     document.querySelectorAll('.store-grid').forEach(grid => grid.classList.remove('active-content'));
@@ -19,11 +25,139 @@ function validateQty(input) {
     }
 }
 
+// Add item to cart (for ranks)
+function addToCart(itemName, price, qty) {
+    const cartItem = {
+        id: Date.now(),
+        name: itemName,
+        price: price,
+        quantity: qty,
+        total: price * qty
+    };
+    
+    cart.push(cartItem);
+    localStorage.setItem('storeCart', JSON.stringify(cart));
+    updateCartUI();
+    
+    // Show confirmation toast
+    showToast(`${itemName} added to cart!`);
+}
+
+// Add key to cart with quantity from input
+function addKeyToCart(keyName, unitPrice, inputId) {
+    let qty = parseInt(document.getElementById(inputId).value) || 1;
+    if (qty > 50) qty = 50;
+    if (qty < 1) qty = 1;
+
+    const cartItem = {
+        id: Date.now(),
+        name: `${qty}x ${keyName}`,
+        price: unitPrice,
+        quantity: qty,
+        total: unitPrice * qty
+    };
+    
+    cart.push(cartItem);
+    localStorage.setItem('storeCart', JSON.stringify(cart));
+    updateCartUI();
+    
+    // Show confirmation toast
+    showToast(`${qty}x ${keyName} added to cart!`);
+}
+
+// Update cart UI
+function updateCartUI() {
+    const cartCount = document.getElementById('cartCount');
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCount.innerText = totalItems;
+}
+
+// Remove item from cart
+function removeFromCart(itemId) {
+    cart = cart.filter(item => item.id !== itemId);
+    localStorage.setItem('storeCart', JSON.stringify(cart));
+    updateCartUI();
+    displayCartItems();
+    showToast('Item removed from cart');
+}
+
+// Display cart items in modal
+function displayCartItems() {
+    const cartItemsContainer = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
+        cartTotal.style.display = 'none';
+        return;
+    }
+    
+    let html = '<div class="cart-items-list">';
+    let totalPrice = 0;
+    
+    cart.forEach(item => {
+        html += `
+            <div class="cart-item">
+                <div class="cart-item-info">
+                    <h4>${item.name}</h4>
+                    <p>₹${item.price} × ${item.quantity}</p>
+                    <p class="cart-item-total">Total: ₹${item.total}</p>
+                </div>
+                <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+            </div>
+        `;
+        totalPrice += item.total;
+    });
+    
+    html += '</div>';
+    cartItemsContainer.innerHTML = html;
+    
+    document.getElementById('totalPrice').innerText = `₹${totalPrice}`;
+    cartTotal.style.display = 'block';
+}
+
+// Open cart modal
+function openCartModal() {
+    displayCartItems();
+    document.getElementById('cartModal').style.display = 'flex';
+}
+
+// Close cart modal
+function closeCartModal() {
+    document.getElementById('cartModal').style.display = 'none';
+}
+
+// Checkout all items in cart
+function checkoutCart() {
+    if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+    
+    const totalPrice = cart.reduce((sum, item) => sum + item.total, 0);
+    const itemSummary = cart.map(item => `${item.name} (₹${item.total})`).join(', ');
+    
+    document.getElementById('modalItemTitle').innerText = `Items: ${itemSummary} | Total: ₹${totalPrice}`;
+    document.getElementById('selectedItem').value = itemSummary + ` | Total: ₹${totalPrice}`;
+    
+    // Display cart summary
+    let summaryHTML = '<h4 style="margin-bottom: 15px; text-align: left;">Order Summary:</h4>';
+    cart.forEach(item => {
+        summaryHTML += `<div class="summary-item"><span>${item.name}</span><span>₹${item.total}</span></div>`;
+    });
+    summaryHTML += `<div class="summary-total"><span>Total:</span><span>₹${totalPrice}</span></div>`;
+    document.getElementById('cartSummary').innerHTML = summaryHTML;
+    
+    closeCartModal();
+    document.getElementById('paymentModal').style.display = 'flex';
+}
+
 // Open Payment Modal for Ranks
 function openCheckout(itemName, price) {
     const itemFullString = `${itemName} (₹${price})`;
     document.getElementById('modalItemTitle').innerText = `Item: ${itemFullString}`;
     document.getElementById('selectedItem').value = itemFullString;
+    document.getElementById('cartSummary').innerHTML = `<div class="summary-item"><span>${itemName}</span><span>₹${price}</span></div><div class="summary-total"><span>Total:</span><span>₹${price}</span></div>`;
     document.getElementById('paymentModal').style.display = 'flex';
 }
 
@@ -38,6 +172,7 @@ function openKeyCheckout(keyName, unitPrice, inputId) {
 
     document.getElementById('modalItemTitle').innerText = `Item: ${itemFullString}`;
     document.getElementById('selectedItem').value = itemFullString;
+    document.getElementById('cartSummary').innerHTML = `<div class="summary-item"><span>${qty}x ${keyName}</span><span>₹${totalPrice}</span></div><div class="summary-total"><span>Total:</span><span>₹${totalPrice}</span></div>`;
     document.getElementById('paymentModal').style.display = 'flex';
 }
 
@@ -51,12 +186,24 @@ function closeCheckout() {
 // Copy Server IP to Clipboard
 function copyIP() {
     navigator.clipboard.writeText("dioxide.pixelforge.gg");
-    alert("Server IP copied: dioxide.pixelforge.gg");
+    showToast("Server IP copied: dioxide.pixelforge.gg");
 }
 
-// Open Cart Modal (missing function)
-function openCartModal() {
-    alert("Cart feature coming soon!");
+// Toast notification
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.innerText = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 2500);
 }
 
 // Handle Form Submission to Google Apps Script
@@ -85,6 +232,12 @@ document.getElementById('payForm').addEventListener('submit', function(e) {
         msg.style.color = "#22c55e";
         msg.innerText = "Bill logged! Staff will verify your UTR shortly.";
         document.getElementById('payForm').reset();
+        
+        // Clear cart after successful payment
+        cart = [];
+        localStorage.setItem('storeCart', JSON.stringify(cart));
+        updateCartUI();
+        
         setTimeout(closeCheckout, 3000);
     })
     .catch(err => {
