@@ -100,8 +100,8 @@ body::after {
 }
 
 .hero-logo {
-    font-size: clamp(4.5rem, 13vw, 18rem);
-    line-height: 0.85;
+    font-size: clamp(7rem, 16vw, 22rem);
+    line-height: 0.78;
     font-weight: 900;
     letter-spacing: -0.08em;
     text-transform: uppercase;
@@ -829,7 +829,7 @@ body::after {
 
 @media (min-width: 1025px) {
     .store-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 30px;
     }
 
