@@ -538,6 +538,15 @@ body {
     color: #ffffff;
 }
 
+.support-style {
+    color: #f8fafc;
+}
+
+.support-style:hover {
+    background: #2563eb;
+    color: #ffffff;
+}
+
 .ip-style {
     font-family: 'Courier New', monospace;
 }
@@ -576,4 +585,5 @@ body {
         width: 100%;
         justify-content: center;
     }
-    }
+}
+
