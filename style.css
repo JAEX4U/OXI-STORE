@@ -587,14 +587,26 @@ body::after {
     color: #fff;
 }
 
+.footer-btn svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+    flex-shrink: 0;
+}
+
 .discord-style {
     color: #ffffff;
-    background: #5865F2; /* Official Discord Blurple */
+    background: #5865F2;
     border-color: rgba(255, 255, 255, 0.2);
+    font-size: 1.15rem;
+    font-weight: 800;
+    padding: 18px 32px;
+    border-radius: 12px;
+    letter-spacing: -0.02em;
 }
 
 .discord-style:hover {
-    background: #4752C4; /* Darker shade for hover state */
+    background: #4752C4;
     color: #ffffff;
     border-color: rgba(255, 255, 255, 0.5);
     box-shadow: 0 0 12px rgba(88, 101, 242, 0.35);
