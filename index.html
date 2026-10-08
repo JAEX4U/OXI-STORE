@@ -9,7 +9,6 @@
 </head>
 <body>
 
-    <!-- Header / Branding -->
     <header class="navbar">
         <div class="logo">⚡ DIOXIDE STORE</div>
         <div class="cart-nav" onclick="openCartModal()">
@@ -18,19 +17,16 @@
     </header>
 
     <main class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1>Upgrade Your In-Game Experience</h1>
-            <p>Select your rank or crate key package, pay via UPI, and submit your UTR for manual verification.</p>
+        <section class="hero hero-immersive">
+            <div class="hero-logo">DIOXIDE</div>
+            <p>Upgrade Your In-Game Experience</p>
         </section>
 
-        <!-- Category Tabs -->
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('ranks')">Ranks</button>
             <button class="tab-btn" onclick="switchTab('keys')">Crate Keys</button>
         </div>
 
-        <!-- Store Grid: Ranks Section -->
         <div id="ranks" class="store-grid active-content">
             <div class="product-card">
                 <span class="badge">Popular</span>
@@ -80,9 +76,7 @@
             </div>
         </div>
 
-        <!-- Store Grid: Individual Crate Keys Section -->
         <div id="keys" class="store-grid">
-            <!-- Common Key -->
             <div class="product-card">
                 <h3 class="key common">Common Key</h3>
                 <div class="price">₹10 <span style="font-size: 0.9rem; color: #94a3b8;">/ key</span></div>
@@ -101,7 +95,6 @@
                 </div>
             </div>
 
-            <!-- Rare Key -->
             <div class="product-card">
                 <h3 class="key rare">Rare Key</h3>
                 <div class="price">₹25 <span style="font-size: 0.9rem; color: #94a3b8;">/ key</span></div>
@@ -120,7 +113,6 @@
                 </div>
             </div>
 
-            <!-- Legendary Key -->
             <div class="product-card">
                 <h3 class="key legendary">Legendary Key</h3>
                 <div class="price">₹50 <span style="font-size: 0.9rem; color: #94a3b8;">/ key</span></div>
@@ -139,7 +131,6 @@
                 </div>
             </div>
 
-            <!-- Mythic Key -->
             <div class="product-card">
                 <h3 class="key mythic">Mythic Key</h3>
                 <div class="price">₹100 <span style="font-size: 0.9rem; color: #94a3b8;">/ key</span></div>
@@ -158,7 +149,6 @@
                 </div>
             </div>
 
-            <!-- Colossal Key -->
             <div class="product-card">
                 <h3 class="key colossal">Colossal Key</h3>
                 <div class="price">₹200 <span style="font-size: 0.9rem; color: #94a3b8;">/ key</span></div>
@@ -179,7 +169,6 @@
         </div>
     </main>
 
-    <!-- Cart Modal -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeCartModal()">&times;</span>
@@ -194,23 +183,17 @@
         </div>
     </div>
 
-    <!-- Payment Modal Window -->
     <div id="paymentModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeCheckout()">&times;</span>
             <h2>Complete Payment</h2>
             <h3 id="modalItemTitle"></h3>
-            
-            <div class="cart-summary" id="cartSummary">
-                <!-- Cart item breakdown injected via script -->
-            </div>
-            
+            <div class="cart-summary" id="cartSummary"></div>
             <img src="https://i.ibb.co/G3dzfN90/1000101649.jpg" alt="UPI QR Code" class="qr-image">
             <p class="qr-sub">Scan using any UPI app (GPay, PhonePe, Paytm)</p>
 
             <form id="payForm">
                 <input type="hidden" id="selectedItem">
-                
                 <div class="form-group">
                     <label for="username">Minecraft Username</label>
                     <input type="text" id="username" placeholder="e.g. Steve_Gamer" required>
@@ -228,7 +211,6 @@
         </div>
     </div>
 
-    <!-- Footer Section -->
     <footer class="footer">
         <div class="footer-buttons">
             <a href="https://discord.gg/EpnjfuHgjT" target="_blank" class="footer-btn discord-style">
@@ -247,4 +229,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
