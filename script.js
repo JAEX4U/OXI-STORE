@@ -54,6 +54,11 @@ function copyIP() {
     alert("Server IP copied: dioxide.pixelforge.gg");
 }
 
+// Open Cart Modal (missing function)
+function openCartModal() {
+    alert("Cart feature coming soon!");
+}
+
 // Handle Form Submission to Google Apps Script
 document.getElementById('payForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -91,4 +96,3 @@ document.getElementById('payForm').addEventListener('submit', function(e) {
         submitBtn.disabled = false;
     });
 });
-        
