@@ -588,12 +588,17 @@ body::after {
 }
 
 .discord-style {
-    color: #b9c1ff;
+    color: #ffffff;
+    background: #5865F2; /* Official Discord Blurple */
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .discord-style:hover {
-    background: #5865f2;
-    color: #fff;
+    background: #4752C4; /* Darker shade for hover state */
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 12px rgba(88, 101, 242, 0.35);
+    transform: translateY(-1px);
 }
 
 .support-style {
