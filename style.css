@@ -12,7 +12,6 @@ body {
     padding-bottom: 50px;
 }
 
-/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -46,22 +45,6 @@ body {
     color: #38bdf8;
 }
 
-.server-ip {
-    background: #1e293b;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    border: 1px solid #334155;
-    transition: 0.2s;
-}
-
-.server-ip:hover {
-    background: #334155;
-}
-
-/* Container & Hero */
 .container {
     max-width: 1100px;
     margin: 0 auto;
@@ -86,7 +69,6 @@ body {
     margin: 0 auto;
 }
 
-/* Navigation Tabs */
 .tabs {
     display: flex;
     justify-content: center;
@@ -111,7 +93,6 @@ body {
     border-color: #0284c7;
 }
 
-/* Store Grid */
 .store-grid {
     display: none;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -122,7 +103,6 @@ body {
     display: grid;
 }
 
-/* Product Cards */
 .product-card {
     background: #161b22;
     border: 1px solid #21262d;
@@ -177,12 +157,6 @@ body {
     margin: 15px 0;
 }
 
-.subtitle {
-    font-size: 0.9rem;
-    color: #94a3b8;
-    margin-bottom: 15px;
-}
-
 .features {
     list-style: none;
     margin-bottom: 25px;
@@ -196,7 +170,6 @@ body {
     color: #cbd5e1;
 }
 
-/* Key Colors */
 .key {
     font-weight: 800;
     padding: 2px 6px;
@@ -209,7 +182,6 @@ body {
 .key.mythic { color: #ff55ff; }
 .key.colossal { color: #ff5555; text-shadow: 0 0 5px rgba(255,85,85,0.5); }
 
-/* Button Group */
 .button-group {
     display: flex;
     gap: 10px;
@@ -248,7 +220,6 @@ body {
     background: #16a34a;
 }
 
-/* Modal Window */
 .modal {
     display: none;
     position: fixed;
@@ -290,7 +261,6 @@ body {
     color: #f8fafc;
 }
 
-/* Cart Modal Specific */
 .cart-items-container {
     text-align: left;
     margin: 20px 0;
@@ -386,7 +356,6 @@ body {
     background: #16a34a;
 }
 
-/* Payment Modal Specific */
 .qr-image {
     width: 180px;
     height: 180px;
@@ -468,7 +437,6 @@ body {
     border-radius: 6px;
     font-weight: 700;
     cursor: pointer;
-    transition: 0.2s;
 }
 
 #submitBtn:hover {
@@ -480,7 +448,6 @@ body {
     font-size: 0.85rem;
 }
 
-/* Toast Notification */
 .toast-notification {
     position: fixed;
     bottom: 20px;
@@ -500,7 +467,6 @@ body {
     opacity: 1;
 }
 
-/* Key Selector */
 .key-selector {
     margin-bottom: 15px;
 }
@@ -528,7 +494,6 @@ body {
     border-color: #38bdf8;
 }
 
-/* Footer */
 .footer {
     text-align: center;
     padding: 30px 20px;
@@ -552,11 +517,11 @@ body {
     border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.2s;
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 8px;
+    transition: 0.2s;
 }
 
 .footer-btn:hover {
@@ -577,7 +542,6 @@ body {
     font-family: 'Courier New', monospace;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .navbar {
         padding: 15px 20px;
@@ -612,4 +576,4 @@ body {
         width: 100%;
         justify-content: center;
     }
-}
+    }
