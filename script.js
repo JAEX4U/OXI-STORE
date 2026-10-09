@@ -2,18 +2,58 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUKKj6Hr8xAH
 
 let cart = JSON.parse(localStorage.getItem('storeCart')) || [];
 
-window.addEventListener('load', updateCartUI);
+window.addEventListener('load', () => {
+    updateCartUI();
+    
+    // Attach form submit listener safely if element exists
+    const payForm = document.getElementById('payForm');
+    if (payForm) {
+        payForm.addEventListener('submit', handlePaymentSubmit);
+    }
+});
 
+/* ==========================================================================
+   Navigation Dropdown Menu
+   ========================================================================== */
+function toggleDropdown() {
+    const dropdown = document.getElementById("navDropdown");
+    if (dropdown) {
+        dropdown.classList.toggle("show");
+    }
+}
+
+// Close dropdown menu when clicking outside
+window.addEventListener("click", function (event) {
+    if (!event.target.closest('.menu-container')) {
+        const dropdowns = document.getElementsByClassName("dropdown-menu");
+        for (let i = 0; i < dropdowns.length; i++) {
+            if (dropdowns[i].classList.contains('show')) {
+                dropdowns[i].classList.remove('show');
+            }
+        }
+    }
+});
+
+/* ==========================================================================
+   Tab Switcher (Ranks / Crate Keys)
+   ========================================================================== */
 function switchTab(tabName, event) {
     document.querySelectorAll('.store-grid').forEach(grid => grid.classList.remove('active-content'));
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
 
-    document.getElementById(tabName).classList.add('active-content');
+    const selectedTab = document.getElementById(tabName);
+    if (selectedTab) {
+        selectedTab.classList.add('active-content');
+    }
+
     if (event && event.currentTarget) {
         event.currentTarget.classList.add('active');
     }
 }
 
+/* ==========================================================================
+   Quantity Validation
+   ========================================================================== */
 function validateQty(input) {
     let val = parseInt(input.value);
     if (val > 50) {
@@ -23,6 +63,9 @@ function validateQty(input) {
     }
 }
 
+/* ==========================================================================
+   Cart Operations
+   ========================================================================== */
 function addToCart(itemName, price, qty = 1) {
     const cartItem = {
         id: Date.now(),
@@ -108,6 +151,9 @@ function displayCartItems() {
     cartTotal.style.display = 'block';
 }
 
+/* ==========================================================================
+   Modals Control
+   ========================================================================== */
 function openCartModal() {
     displayCartItems();
     document.getElementById('cartModal').style.display = 'flex';
@@ -171,9 +217,13 @@ function openKeyCheckout(keyName, unitPrice, inputId) {
 function closeCheckout() {
     document.getElementById('paymentModal').style.display = 'none';
     document.getElementById('msg').innerText = '';
-    document.getElementById('payForm').reset();
+    const payForm = document.getElementById('payForm');
+    if (payForm) payForm.reset();
 }
 
+/* ==========================================================================
+   Utilities & Notifications
+   ========================================================================== */
 function copyIP() {
     navigator.clipboard.writeText("dioxide.pixelforge.gg");
     showToast("Server IP copied: dioxide.pixelforge.gg");
@@ -195,7 +245,10 @@ function showToast(message) {
     }, 2500);
 }
 
-document.getElementById('payForm').addEventListener('submit', function(e) {
+/* ==========================================================================
+   Google Sheet Form Submission Handler
+   ========================================================================== */
+function handlePaymentSubmit(e) {
     e.preventDefault();
 
     const submitBtn = document.getElementById('submitBtn');
@@ -235,5 +288,4 @@ document.getElementById('payForm').addEventListener('submit', function(e) {
     .finally(() => {
         submitBtn.disabled = false;
     });
-});
-  
+          }
