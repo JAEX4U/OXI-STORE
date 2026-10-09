@@ -1,4 +1,3 @@
-Here is your updated index.html home page, customized with your server launch details, in-game features, balance leaderboards, upcoming events, inspirational Minecraft quotes, and useful commands.
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,14 +13,25 @@ Here is your updated index.html home page, customized with your server launch de
         <div class="logo">⚡ DIOXIDE STORE</div>
         
         <div class="nav-right">
-            <nav class="nav-links">
-                <a href="index.html" class="nav-btn">Home</a>
-                <a href="store.html" class="nav-btn">Shop</a>
-                <a href="https://discord.gg/EpnjfuHgjT" target="_blank" class="nav-btn">Help</a>
-            </nav>
-
+            <!-- Shopping Cart -->
             <div class="cart-nav" onclick="openCartModal()">
                 🛒 Cart (<span id="cartCount">0</span>)
+            </div>
+
+            <!-- 3-Line Hamburger Menu Button -->
+            <div class="menu-container">
+                <button class="hamburger-btn" onclick="toggleDropdown()" aria-label="Toggle Navigation Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                
+                <!-- Dropdown Content -->
+                <div id="navDropdown" class="dropdown-menu">
+                    <a href="index.html">Home</a>
+                    <a href="store.html">Shop</a>
+                    <a href="#help">Help</a>
+                </div>
             </div>
         </div>
     </header>
@@ -31,101 +41,41 @@ Here is your updated index.html home page, customized with your server launch de
         <section class="hero hero-immersive">
             <div class="hero-logo">DIOXIDE SMP</div>
             <p>The Ultimate Survival & Economy Experience</p>
-            <div style="margin-top: 20px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <a href="store.html" class="buy-btn" style="text-decoration: none; padding: 12px 28px; font-size: 1.1rem;">Visit Store</a>
-                <button class="cart-btn" onclick="copyIP()" style="padding: 12px 28px; font-size: 1.1rem;">Copy Server IP</button>
+            <div style="margin-top: 20px;">
+                <a href="store.html" class="buy-btn" style="text-decoration: none; padding: 12px 28px; font-size: 1.1rem; display: inline-block;">Visit Store</a>
             </div>
         </section>
 
-        <!-- Server Overview & Founder Info -->
-        <section class="info-section" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 16px; padding: 25px; margin-bottom: 30px; text-align: center;">
-            <h2 style="color: #8b5cf6; margin-bottom: 10px;">📜 Server Information</h2>
-            <p style="color: #cbd5e1; font-size: 1.05rem;">
-                Created on <strong>September 28, 2026</strong> by Founder <strong>END SPY</strong>.
-            </p>
-            <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 8px;">
-                Built to deliver a competitive yet community-focused SMP experience featuring player economies, customized crates, and constant events.
-            </p>
-        </section>
-
-        <!-- Inspirational Speech / Speech Box -->
-        <section class="speech-box" style="background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(79, 70, 229, 0.2)); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 16px; padding: 25px; margin-bottom: 30px; text-align: center;">
-            <h3 style="color: #f8fafc; margin-bottom: 10px;">💬 Founder's Message</h3>
-            <blockquote style="font-style: italic; color: #e2e8f0; font-size: 1.05rem; max-width: 800px; margin: 0 auto;">
-                "Your empire starts with a single block. Trade smart, fight hard, build legacies, and rise to the top of the leaderboard. Welcome to Dioxide SMP!" 
-            </blockquote>
-            <span style="display: block; margin-top: 10px; color: #a78bfa; font-weight: 700;">— END SPY</span>
-        </section>
-
-        <!-- In-Game Features Grid -->
-        <h2 style="color: #f8fafc; margin-bottom: 20px; text-align: center;">⚡ Core Gameplay Features</h2>
-        <div class="store-grid active-content" style="margin-bottom: 40px;">
+        <!-- Home Features Grid -->
+        <div class="store-grid active-content" style="margin-top: 30px;">
             <div class="product-card">
-                <h3>💰 Player Economy</h3>
+                <h3>🎮 Custom Gameplay</h3>
                 <p style="color: #94a3b8; margin: 15px 0; font-size: 0.95rem;">
-                    Earn money by selling resources, completing jobs, and trading directly with other players in a player-driven market.
+                    Experience enhanced SMP mechanics with claim protection, player shops, custom crates, and rank progression.
                 </p>
             </div>
 
-            <div class="product-card">
-                <h3>🛒 Server Shop & /ah</h3>
+            <div class="product-card featured">
+                <span class="badge highlight">Active</span>
+                <h3>🌐 Join Our Server</h3>
                 <p style="color: #94a3b8; margin: 15px 0; font-size: 0.95rem;">
-                    Browse the official in-game shop or list your rare items on the Auction House for bidding wars.
+                    Connect using Java or Bedrock! Copy our server IP below and hop in right away.
                 </p>
-            </div>
-
-            <div class="product-card">
-                <h3>📦 Kits & Crate Keys</h3>
-                <p style="color: #94a3b8; margin: 15px 0; font-size: 0.95rem;">
-                    Unlock starter kits to kickstart your journey or spin reward crates for enchanted gear and exclusive rewards.
-                </p>
-            </div>
-        </div>
-
-        <!-- Leaderboard & Events Section -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px;">
-            
-            <!-- Balance Leaderboard -->
-            <div class="product-card" style="text-align: left;">
-                <h3 style="text-align: center; color: #fbbf24;">🏆 Top Richest Players</h3>
-                <ul class="features" style="margin-top: 15px;">
-                    <li style="display: flex; justify-content: space-between;"><span>🥇 #1 END SPY</span> <strong>₹5,000,000</strong></li>
-                    <li style="display: flex; justify-content: space-between;"><span>🥈 #2 Steve_Gamer</span> <strong>₹3,250,000</strong></li>
-                    <li style="display: flex; justify-content: space-between;"><span>🥉 #3 Alex_Pro</span> <strong>₹1,800,000</strong></li>
-                    <li style="display: flex; justify-content: space-between;"><span>#4 Miner_49er</span> <strong>₹950,000</strong></li>
-                    <li style="display: flex; justify-content: space-between;"><span>#5 DragonSlayer</span> <strong>₹720,000</strong></li>
-                </ul>
-            </div>
-
-            <!-- Server Events -->
-            <div class="product-card" style="text-align: left;">
-                <h3 style="text-align: center; color: #67e8f9;">🎉 Active & Upcoming Events</h3>
-                <div style="margin-top: 15px;">
-                    <div style="margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid rgba(148, 163, 184, 0.12);">
-                        <strong style="color: #f8fafc;">⚔️ End Dragon Fight Event</strong>
-                        <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 4px;">Join the server squad every Saturday at 7 PM IST to defeat the dragon for legendary drops!</p>
-                    </div>
-                    <div>
-                        <strong style="color: #f8fafc;">🔥 2x XP & Money Weekend</strong>
-                        <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 4px;">Boost your rank progression and earnings every Sunday!</p>
-                    </div>
+                <div class="button-group">
+                    <button class="buy-btn" onclick="copyIP()">Copy IP: dioxide.pixelforge.gg</button>
                 </div>
             </div>
 
-        </div>
-
-        <!-- Useful Commands Section -->
-        <section class="product-card" style="text-align: center; margin-bottom: 40px;">
-            <h2 style="color: #8b5cf6; margin-bottom: 15px;">⌨️ Useful In-Game Commands</h2>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 15px;">
-                <span class="key common" style="font-size: 1rem; padding: 8px 14px;">/rtp - Random Teleport</span>
-                <span class="key rare" style="font-size: 1rem; padding: 8px 14px;">/shop - Open Server Shop</span>
-                <span class="key legendary" style="font-size: 1rem; padding: 8px 14px;">/ah - Auction House</span>
-                <span class="key mythic" style="font-size: 1rem; padding: 8px 14px;">/home - Teleport Home</span>
-                <span class="key colossal" style="font-size: 1rem; padding: 8px 14px;">/tp - Teleport Request</span>
+            <div class="product-card">
+                <h3>💬 Community</h3>
+                <p style="color: #94a3b8; margin: 15px 0; font-size: 0.95rem;">
+                    Join thousands of players, participate in weekly events, and get 24/7 support in our Discord community.
+                </p>
+                <div class="button-group">
+                    <a href="https://discord.gg/EpnjfuHgjT" target="_blank" class="cart-btn" style="text-decoration: none; text-align: center; display: block;">Join Discord</a>
+                </div>
             </div>
-        </section>
-
+        </div>
     </main>
 
     <!-- Shopping Cart Modal -->
@@ -173,35 +123,21 @@ Here is your updated index.html home page, customized with your server launch de
     </div>
 
     <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-brand">
-                ⚡ DIOXIDE STORE
-                <p>Upgrade Your In-Game Experience</p>
-            </div>
-
-            <div class="footer-buttons">
-                <a href="https://discord.gg/EpnjfuHgjT" target="_blank" class="footer-btn discord-style">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-9.65 0 12.14 12.14 0 0 0-.609-1.25.076.076 0 0 0-.079-.037A19.736 19.736 0 0 0 3.683 4.37a.077.077 0 0 0-.036.026C.8 8.438 0 12.45 0 16.416a.078.078 0 0 0 .026.055c1.618 1.199 3.183 1.924 4.713 2.406a.08.08 0 0 0 .086-.028c.362-.495.684-1.02.96-1.573a.076.076 0 0 0-.041-.106 12.727 12.727 0 0 1-1.823-.874.078.078 0 0 1-.004-.13c.122-.09.245-.184.362-.282a.078.078 0 0 1 .082-.013c3.818 1.74 7.95 1.74 11.705 0a.078.078 0 0 1 .082.013c.117.098.24.192.362.282a.078.078 0 0 1-.004.13 12.727 12.727 0 0 1-1.823.874.076.076 0 0 0-.041.106c.276.553.598 1.078.96 1.573a.08.08 0 0 0 .086.028c1.53-.482 3.095-1.207 4.713-2.406a.078.078 0 0 0 .026-.055c0-3.966-.8-7.978-2.282-12.019a.077.077 0 0 0-.036-.026ZM8.92 14.208c-.924 0-1.683-.84-1.683-1.872 0-1.031.748-1.872 1.683-1.872.94 0 1.692.846 1.683 1.872 0 1.032-.748 1.872-1.683 1.872Zm6.16 0c-.924 0-1.683-.84-1.683-1.872 0-1.031.748-1.872 1.683-1.872.94 0 1.692.846 1.683 1.872 0 1.032-.748 1.872-1.683 1.872Z"/>
-                    </svg>
-                    Join Discord
-                </a>
-                <a href="mailto:dioxsupport@gmail.com" class="footer-btn support-style">
-                    ✉ Support Email
-                </a>
-                <button class="footer-btn ip-style" onclick="copyIP()">
-                    📋 dioxide.pixelforge.gg
-                </button>
-            </div>
-
-            <div class="footer-disclaimer">
-                <p>&copy; 2026 Dioxide SMP. All rights reserved.</p>
-                <p>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</p>
-            </div>
+        <div class="footer-buttons">
+            <a href="https://discord.gg/EpnjfuHgjT" target="_blank" class="footer-btn discord-style">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27[...]
+                Join Discord
+            </a>
+            <a href="mailto:dioxsupport@gmail.com" class="footer-btn support-style">
+                ✉ dioxsupport@gmail.com
+            </a>
+            <button class="footer-btn ip-style" onclick="copyIP()">
+                dioxide.pixelforge.gg
+            </button>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
-</html>
-
+                </html>
+                    
