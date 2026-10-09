@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dioxide Store</title>
+    <title>Dioxide SMP | Home</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
@@ -11,164 +11,74 @@
 
     <header class="navbar">
         <div class="logo">⚡ DIOXIDE STORE</div>
-        <div class="cart-nav" onclick="openCartModal()">
-            🛒 Cart (<span id="cartCount">0</span>)
+        
+        <div class="nav-right">
+            <!-- Shopping Cart -->
+            <div class="cart-nav" onclick="openCartModal()">
+                🛒 Cart (<span id="cartCount">0</span>)
+            </div>
+
+            <!-- 3-Line Hamburger Menu Button -->
+            <div class="menu-container">
+                <button class="hamburger-btn" onclick="toggleDropdown()" aria-label="Toggle Navigation Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                
+                <!-- Dropdown Content -->
+                <div id="navDropdown" class="dropdown-menu">
+                    <a href="index.html">Home</a>
+                    <a href="store.html">Shop</a>
+                    <a href="#help">Help</a>
+                </div>
+            </div>
         </div>
     </header>
 
     <main class="container">
+        <!-- Hero Home Banner -->
         <section class="hero hero-immersive">
             <div class="hero-logo">DIOXIDE SMP</div>
-            <p>Upgrade Your In-Game Experience</p>
+            <p>The Ultimate Survival & Economy Experience</p>
+            <div style="margin-top: 20px;">
+                <a href="store.html" class="buy-btn" style="text-decoration: none; padding: 12px 28px; font-size: 1.1rem; display: inline-block;">Visit Store</a>
+            </div>
         </section>
 
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('ranks')">Ranks</button>
-            <button class="tab-btn" onclick="switchTab('keys')">Crate Keys</button>
-        </div>
-
-        <div id="ranks" class="store-grid active-content">
+        <!-- Home Features Grid -->
+        <div class="store-grid active-content" style="margin-top: 30px;">
             <div class="product-card">
-                <span class="badge">Popular</span>
-                <h3>OXi</h3>
-                <div class="price">₹100</div>
-                <ul class="features">
-                    <li>Basic Rank Perks</li>
-                    <li>/fly in Claim</li>
-                    <li>2x Vault Access</li>
-                </ul>
-                <div class="button-group">
-                    <button class="buy-btn" onclick="openCheckout('OXi Rank', 100)">Purchase</button>
-                    <button class="cart-btn" onclick="addToCart('OXi Rank', 100, 1)">Add to Cart</button>
-                </div>
+                <h3>🎮 Custom Gameplay</h3>
+                <p style="color: #94a3b8; margin: 15px 0; font-size: 0.95rem;">
+                    Experience enhanced SMP mechanics with claim protection, player shops, custom crates, and rank progression.
+                </p>
             </div>
 
             <div class="product-card featured">
-                <span class="badge highlight">Best Value</span>
-                <h3>OXii+</h3>
-                <div class="price">₹250</div>
-                <ul class="features">
-                    <li>All OXi Perks</li>
-                    <li>/fly Everywhere</li>
-                    <li>5x Vault Access</li>
-                    <li>Custom Chat Tag</li>
-                </ul>
+                <span class="badge highlight">Active</span>
+                <h3>🌐 Join Our Server</h3>
+                <p style="color: #94a3b8; margin: 15px 0; font-size: 0.95rem;">
+                    Connect using Java or Bedrock! Copy our server IP below and hop in right away.
+                </p>
                 <div class="button-group">
-                    <button class="buy-btn" onclick="openCheckout('OXii+ Rank', 250)">Purchase</button>
-                    <button class="cart-btn" onclick="addToCart('OXii+ Rank', 250, 1)">Add to Cart</button>
+                    <button class="buy-btn" onclick="copyIP()">Copy IP: dioxide.pixelforge.gg</button>
                 </div>
             </div>
 
             <div class="product-card">
-                <span class="badge">Ultimate</span>
-                <h3>OXiii++</h3>
-                <div class="price">₹500</div>
-                <ul class="features">
-                    <li>All OXii+ Perks</li>
-                    <li>Priority Queue</li>
-                    <li>10x Vault Access</li>
-                    <li>Exclusive Cosmetics</li>
-                </ul>
+                <h3>💬 Community</h3>
+                <p style="color: #94a3b8; margin: 15px 0; font-size: 0.95rem;">
+                    Join thousands of players, participate in weekly events, and get 24/7 support in our Discord community.
+                </p>
                 <div class="button-group">
-                    <button class="buy-btn" onclick="openCheckout('OXiii++ Rank', 500)">Purchase</button>
-                    <button class="cart-btn" onclick="addToCart('OXiii++ Rank', 500, 1)">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="keys" class="store-grid">
-            <div class="product-card">
-                <h3 class="key common">Common Key</h3>
-                <div class="price">₹10 <span style="font-size: 0.9rem; color: #94a3b8;">/ key</span></div>
-                <ul class="features">
-                    <li>Basic starter tools</li>
-                    <li>Coal & Iron resources</li>
-                    <li>Food supply bundles</li>
-                </ul>
-                <div class="key-selector">
-                    <label>Quantity (Max 50):</label>
-                    <input type="number" id="qty-common" min="1" max="50" value="1" oninput="validateQty(this)">
-                </div>
-                <div class="button-group">
-                    <button class="buy-btn" onclick="openKeyCheckout('Common Key', 10, 'qty-common')">Purchase Keys</button>
-                    <button class="cart-btn" onclick="addKeyToCart('Common Key', 10, 'qty-common')">Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <h3 class="key rare">Rare Key</h3>
-                <div class="price">₹25 <span style="font-size: 0.9rem; color: #94a3b8;">/ key</span></div>
-                <ul class="features">
-                    <li>Enchanted Diamond Gear</li>
-                    <li>Gold & Redstone crates</li>
-                    <li>Claim Block vouchers</li>
-                </ul>
-                <div class="key-selector">
-                    <label>Quantity (Max 50):</label>
-                    <input type="number" id="qty-rare" min="1" max="50" value="1" oninput="validateQty(this)">
-                </div>
-                <div class="button-group">
-                    <button class="buy-btn" onclick="openKeyCheckout('Rare Key', 25, 'qty-rare')">Purchase Keys</button>
-                    <button class="cart-btn" onclick="addKeyToCart('Rare Key', 25, 'qty-rare')">Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <h3 class="key legendary">Legendary Key</h3>
-                <div class="price">₹50 <span style="font-size: 0.9rem; color: #94a3b8;">/ key</span></div>
-                <ul class="features">
-                    <li>Netherite gear & weapons</li>
-                    <li>High-tier spawner eggs</li>
-                    <li>In-game cash vouchers</li>
-                </ul>
-                <div class="key-selector">
-                    <label>Quantity (Max 50):</label>
-                    <input type="number" id="qty-legendary" min="1" max="50" value="1" oninput="validateQty(this)">
-                </div>
-                <div class="button-group">
-                    <button class="buy-btn" onclick="openKeyCheckout('Legendary Key', 50, 'qty-legendary')">Purchase Keys</button>
-                    <button class="cart-btn" onclick="addKeyToCart('Legendary Key', 50, 'qty-legendary')">Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <h3 class="key mythic">Mythic Key</h3>
-                <div class="price">₹100 <span style="font-size: 0.9rem; color: #94a3b8;">/ key</span></div>
-                <ul class="features">
-                    <li>Custom cosmetic armor</li>
-                    <li>Rare particle effects</li>
-                    <li>1.5x XP Boosters</li>
-                </ul>
-                <div class="key-selector">
-                    <label>Quantity (Max 50):</label>
-                    <input type="number" id="qty-mythic" min="1" max="50" value="1" oninput="validateQty(this)">
-                </div>
-                <div class="button-group">
-                    <button class="buy-btn" onclick="openKeyCheckout('Mythic Key', 100, 'qty-mythic')">Purchase Keys</button>
-                    <button class="cart-btn" onclick="addKeyToCart('Mythic Key', 100, 'qty-mythic')">Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <h3 class="key colossal">Colossal Key</h3>
-                <div class="price">₹200 <span style="font-size: 0.9rem; color: #94a3b8;">/ key</span></div>
-                <ul class="features">
-                    <li>Max-Enchant God Weapons</li>
-                    <li>Server-wide XP Boosters</li>
-                    <li>Exclusive Tag & Cosmetics</li>
-                </ul>
-                <div class="key-selector">
-                    <label>Quantity (Max 50):</label>
-                    <input type="number" id="qty-colossal" min="1" max="50" value="1" oninput="validateQty(this)">
-                </div>
-                <div class="button-group">
-                    <button class="buy-btn" onclick="openKeyCheckout('Colossal Key', 200, 'qty-colossal')">Purchase Keys</button>
-                    <button class="cart-btn" onclick="addKeyToCart('Colossal Key', 200, 'qty-colossal')">Add to Cart</button>
+                    <a href="https://discord.gg/EpnjfuHgjT" target="_blank" class="cart-btn" style="text-decoration: none; text-align: center; display: block;">Join Discord</a>
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- Shopping Cart Modal -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeCartModal()">&times;</span>
@@ -183,6 +93,7 @@
         </div>
     </div>
 
+    <!-- Payment Modal -->
     <div id="paymentModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeCheckout()">&times;</span>
@@ -228,5 +139,4 @@
 
     <script src="script.js"></script>
 </body>
-  </html>
-  
+</html>
