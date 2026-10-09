@@ -42,13 +42,16 @@ body::after {
     z-index: -1;
 }
 
+/* ==========================================================================
+   Navigation Bar & Hamburger Dropdown Menu
+   ========================================================================== */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 24px 7%;
     position: relative;
-    z-index: 2;
+    z-index: 100;
     background: rgba(6, 8, 11, 0.18);
     backdrop-filter: blur(6px);
     border-bottom: 1px solid rgba(255,255,255,0.15);
@@ -60,6 +63,13 @@ body::after {
     color: #f4f4f4;
     letter-spacing: 2px;
     text-shadow: 0 0 18px rgba(0,0,0,0.3);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
 }
 
 .cart-nav {
@@ -79,6 +89,74 @@ body::after {
     background: rgba(31, 41, 55, 0.8);
 }
 
+/* 3-Line Hamburger Button */
+.menu-container {
+    position: relative;
+}
+
+.hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+}
+
+.hamburger-btn .bar {
+    width: 100%;
+    height: 3px;
+    background-color: #f8fafc;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.hamburger-btn:hover .bar {
+    background-color: #8b5cf6;
+}
+
+/* Dropdown Menu Popup Box */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 35px;
+    background-color: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(8px);
+    min-width: 140px;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu a {
+    color: #f8fafc;
+    padding: 12px 18px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+    background-color: rgba(139, 92, 246, 0.2);
+    color: #a78bfa;
+}
+
+/* ==========================================================================
+   Main Content Layout
+   ========================================================================== */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -278,6 +356,9 @@ body::after {
     filter: brightness(1.08);
 }
 
+/* ==========================================================================
+   Modals Control & Forms
+   ========================================================================== */
 .modal {
     display: none;
     position: fixed;
@@ -609,21 +690,22 @@ body::after {
     font-family: 'Courier New', monospace;
 }
 
+/* ==========================================================================
+   Responsive Styles
+   ========================================================================== */
 @media (max-width: 768px) {
     body {
         background: #c9c9c9;
     }
 
     .navbar {
-        padding: 12px 16px;
-        flex-wrap: wrap;
+        padding: 14px 16px;
         gap: 10px;
     }
 
     .logo {
         font-size: 0.9rem;
         letter-spacing: 1px;
-        flex: 1;
     }
 
     .cart-nav {
