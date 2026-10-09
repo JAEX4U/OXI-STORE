@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dioxide SMP | Support & Help</title>
+    <title>Dioxide Store</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
@@ -13,24 +13,33 @@
         <div class="logo">⚡ DIOXIDE STORE</div>
         
         <div class="nav-right">
-            <!-- Navigation Buttons -->
-            <nav class="nav-links">
-                <a href="index.html" class="nav-btn">Home</a>
-                <a href="store.html" class="nav-btn">Shop</a>
-                <a href="help.html" class="nav-btn">Help</a>
-            </nav>
-
             <!-- Shopping Cart -->
             <div class="cart-nav" onclick="openCartModal()">
                 🛒 Cart (<span id="cartCount">0</span>)
             </div>
+
+            <!-- 3-Line Hamburger Menu Button -->
+            <div class="menu-container">
+                <button class="hamburger-btn" onclick="toggleDropdown()" aria-label="Toggle Navigation Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                
+                <!-- Dropdown Content -->
+                <div id="navDropdown" class="dropdown-menu">
+                    <a href="index.html">Home</a>
+                    <a href="store.html">Shop</a>
+                    <a href="help.html">Help</a>
+                </div>
+            </div>
         </div>
     </header>
-
+   
     <main class="container">
         <!-- Hero Help Banner -->
         <section class="hero hero-immersive" style="min-height: 280px;">
-            <div class="hero-logo" style="font-size: clamp(3rem, 10vw, 8rem);">NEED HELP?</div>
+            <div class="hero-logo" style="font-size: clamp(3rem, 10vw, 8rem);">DIOXIDE SMP</div>
             <p>Support, FAQs & Server Guides</p>
         </section>
 
