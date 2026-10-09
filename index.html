@@ -13,15 +13,25 @@
         <div class="logo">⚡ DIOXIDE STORE</div>
         
         <div class="nav-right">
-            <nav class="nav-links">
-                <a href="index.html" class="nav-btn">Home</a>
-                <a href="store.html" class="nav-btn">Shop</a>
-                <a href="https://discord.gg/EpnjfuHgjT" target="_blank" class="nav-btn">Help</a>
-            </nav>
-
             <!-- Shopping Cart -->
             <div class="cart-nav" onclick="openCartModal()">
                 🛒 Cart (<span id="cartCount">0</span>)
+            </div>
+
+            <!-- 3-Line Hamburger Menu Button -->
+            <div class="menu-container">
+                <button class="hamburger-btn" onclick="toggleDropdown()" aria-label="Toggle Navigation Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                
+                <!-- Dropdown Content -->
+                <div id="navDropdown" class="dropdown-menu">
+                    <a href="index.html">Home</a>
+                    <a href="store.html">Shop</a>
+                    <a href="#help">Help</a>
+                </div>
             </div>
         </div>
     </header>
