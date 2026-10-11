@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dioxide SMP | Terminal Forum</title>
+    <title>Dioxide SMP | Forum Hub</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
@@ -11,103 +11,63 @@
 
     <header class="navbar">
         <div class="logo">⚡ DIOXIDE FORUM</div>
-
         <div class="nav-right">
-            <div class="cart-nav" onclick="openCartModal()">
-                🛒 Cart (<span id="cartCount">0</span>)
-            </div>
-
+            <div class="cart-nav" onclick="openCartModal()">🛒 Cart (<span id="cartCount">0</span>)</div>
             <div class="menu-container">
-                <button class="hamburger-btn" onclick="toggleDropdown()" aria-label="Toggle Navigation Menu">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
-
+                <button class="hamburger-btn" onclick="toggleDropdown()"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
                 <div id="navDropdown" class="dropdown-menu">
-                    <a href="index.html">Home</a>
-                    <a href="store.html">Shop</a>
-                    <a href="forum.html">Forum</a>
-                    <a href="help.html">Help</a>
+                    <a href="index.html">Home</a><a href="store.html">Shop</a><a href="forum.html">Forum</a><a href="help.html">Help</a>
                 </div>
             </div>
         </div>
     </header>
 
     <main class="container">
-        <!-- Terminal Header -->
-        <section class="info-section" style="background: rgba(10, 15, 30, 0.95); border: 1px solid #8b5cf6; border-radius: 12px; padding: 25px; margin-bottom: 30px; box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);">
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(139, 92, 246, 0.3); padding-bottom: 12px; margin-bottom: 15px;">
-                <span style="font-family: monospace; color: #a78bfa; font-size: 0.9rem;">> TERMINAL_HUB // DIOXIDE_NET_v2.0</span>
-                <span style="color: #22c55e; font-size: 0.85rem; font-family: monospace;">● NETWORK ONLINE</span>
+        <!-- Forum Search & Action Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 30px 0 25px; flex-wrap: wrap; gap: 15px;">
+            <div>
+                <h1 style="color: #f8fafc; font-size: 1.8rem; margin-bottom: 5px;">Community Discussions</h1>
+                <p style="color: #94a3b8; font-size: 0.9rem;">Join threads, share builds, and view server updates.</p>
             </div>
-            <h1 style="color: #f8fafc; font-size: 2rem; margin-bottom: 8px;">COMMUNITY TERMINAL</h1>
-            <p style="color: #94a3b8; font-size: 0.95rem;">Access encrypted transmission logs, community discussions, and system updates.</p>
-        </section>
-
-        <!-- Category Grid Cards -->
-        <div class="store-grid active-content" style="margin-bottom: 35px;">
-            <div class="product-card" style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(251, 191, 36, 0.4); text-align: left;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3 style="color: #fbbf24;">📢 Directives</h3>
-                    <span class="badge" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24;">SYS_LOG</span>
-                </div>
-                <p style="color: #94a3b8; margin-top: 12px; font-size: 0.88rem;">Official announcements, server changelogs, and core event directives.</p>
-            </div>
-
-            <div class="product-card" style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(34, 197, 94, 0.4); text-align: left;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3 style="color: #22c55e;">🛠️ Assistance</h3>
-                    <span class="badge" style="background: rgba(34, 197, 94, 0.15); color: #22c55e;">TICKETS</span>
-                </div>
-                <p style="color: #94a3b8; margin-top: 12px; font-size: 0.88rem;">Player support, payment validation checks, and general troubleshooting.</p>
-            </div>
-
-            <div class="product-card" style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(56, 189, 248, 0.4); text-align: left;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3 style="color: #38bdf8;">🏗️ Blueprints</h3>
-                    <span class="badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">DESIGNS</span>
-                </div>
-                <p style="color: #94a3b8; margin-top: 12px; font-size: 0.88rem;">Base showcases, redstone schemas, and player shop coordinates.</p>
-            </div>
+            <a href="https://discord.gg/EpnjfuHgjT" target="_blank" class="buy-btn" style="text-decoration: none; padding: 10px 20px; font-size: 0.9rem;">+ New Thread on Discord</a>
         </div>
 
-        <!-- Terminal Logs Feed -->
-        <section class="product-card" style="padding: 25px; margin-bottom: 40px; text-align: left;">
-            <h2 style="color: #f8fafc; margin-bottom: 20px; font-size: 1.3rem;">📡 Live Transmission Stream</h2>
-
-            <div style="display: grid; gap: 12px;">
-                <div style="padding: 15px 18px; border-left: 3px solid #38bdf8; background: rgba(15, 23, 42, 0.7); display: flex; justify-content: space-between; align-items: center;">
+        <!-- Topic Cards Feed -->
+        <div style="display: grid; gap: 15px; margin-bottom: 40px;">
+            
+            <div class="product-card" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px; text-align: left;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: #8b5cf6; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff;">ES</div>
                     <div>
-                        <a href="#" style="color: #f8fafc; font-weight: 600; text-decoration: none; font-size: 1rem;">Optimal land claim strategies for beginners</a>
-                        <p style="color: #64748b; font-size: 0.8rem; margin-top: 4px;">USER: Steve_Gamer | REPLIES: 24 | LAST_SIGNAL: 2h ago</p>
+                        <span class="badge" style="background: rgba(139, 92, 246, 0.2); color: #a78bfa; margin-bottom: 6px;">Announcement</span>
+                        <h3 style="color: #f8fafc; font-size: 1.1rem; margin-top: 4px;">Dioxide SMP Launched — Season 1 Rules & Mechanics</h3>
+                        <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 4px;">Posted by <strong>END SPY</strong> • 28/09/2026</p>
                     </div>
-                    <span class="key common" style="font-size: 0.75rem;">/help</span>
                 </div>
-
-                <div style="padding: 15px 18px; border-left: 3px solid #fbbf24; background: rgba(15, 23, 42, 0.7); display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <a href="#" style="color: #f8fafc; font-weight: 600; text-decoration: none; font-size: 1rem;">Dragon Fight Event rewards distribution</a>
-                        <p style="color: #64748b; font-size: 0.8rem; margin-top: 4px;">USER: END SPY | REPLIES: 18 | LAST_SIGNAL: 4h ago</p>
-                    </div>
-                    <span class="key rare" style="font-size: 0.75rem;">/event</span>
-                </div>
-
-                <div style="padding: 15px 18px; border-left: 3px solid #a855f7; background: rgba(15, 23, 42, 0.7); display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <a href="#" style="color: #f8fafc; font-weight: 600; text-decoration: none; font-size: 1rem;">Complete guide to the /ah Auction Market</a>
-                        <p style="color: #64748b; font-size: 0.8rem; margin-top: 4px;">USER: Alex_Pro | REPLIES: 31 | LAST_SIGNAL: 1d ago</p>
-                    </div>
-                    <span class="key legendary" style="font-size: 0.75rem;">/economy</span>
+                <div style="text-align: right; min-width: 80px;">
+                    <span style="color: #38bdf8; font-weight: 700; font-size: 1.1rem;">142</span>
+                    <p style="color: #64748b; font-size: 0.75rem;">Views</p>
                 </div>
             </div>
-        </section>
+
+            <div class="product-card" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px; text-align: left;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: #3b82f6; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff;">SG</div>
+                    <div>
+                        <span class="badge" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; margin-bottom: 6px;">Guides</span>
+                        <h3 style="color: #f8fafc; font-size: 1.1rem; margin-top: 4px;">Top 5 Money Making Methods with /shop & /ah</h3>
+                        <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 4px;">Posted by <strong>Steve_Gamer</strong> • 2 days ago</p>
+                    </div>
+                </div>
+                <div style="text-align: right; min-width: 80px;">
+                    <span style="color: #38bdf8; font-weight: 700; font-size: 1.1rem;">89</span>
+                    <p style="color: #64748b; font-size: 0.75rem;">Views</p>
+                </div>
+            </div>
+
+        </div>
     </main>
 
-    <!-- Modals & Footer identical to main design -->
-    <div id="cartModal" class="modal">...</div>
-    <div id="paymentModal" class="modal">...</div>
-    <footer class="footer">...</footer>
     <script src="script.js"></script>
 </body>
 </html>
