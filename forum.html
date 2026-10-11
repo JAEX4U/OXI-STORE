@@ -1,1 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dioxide Store | Forum</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
 
+    <header class="navbar">
+        <div class="logo">⚡ DIOXIDE STORE</div>
+
+        <div class="nav-right">
+            <div class="cart-nav" onclick="openCartModal()">
+                🛒 Cart (<span id="cartCount">0</span>)
+            </div>
+
+            <div class="menu-container">
+                <button class="hamburger-btn" onclick="toggleDropdown()" aria-label="Toggle Navigation Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+
+                <div id="navDropdown" class="dropdown-menu">
+                    <a href="index.html">Home</a>
+                    <a href="store.html">Shop</a>
+                    <a href="forum.html">Forum</a>
+                    <a href="help.html">Help</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero hero-immersive" style="min-height: 280px;">
+            <div class="hero-logo" style="font-size: clamp(3rem, 9vw, 7rem);">DIOXIDE SMP</div>
+            <p>Community Forum & Player Discussions</p>
+        </section>
+
+        <section class="info-section" style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 16px; padding: 25px; margin-bottom: 30px;">
+            <h2 style="color: #8b5cf6; margin-bottom: 12px; text-align: center;">🗣️ Community Hub</h2>
+            <p style="color: #cbd5e1; text-align: center; line-height: 1.7; max-width: 800px; margin: 0 auto;">
+                Share builds, ask for help, trade ideas, discuss events, and stay updated with everything happening on the server.
+            </p>
+        </section>
+
+        <div class="store-grid active-content" style="margin-bottom: 40px;">
+            <div class="product-card" style="text-align: left;">
+                <h3 style="color: #fbbf24;">📢 Announcements</h3>
+                <p style="color: #94a3b8; margin-top: 12px; font-size: 0.92rem;">
+                    Weekly updates, event alerts, admin messages, and new feature drops for the entire SMP community.
+                </p>
+            </div>
+
+            <div class="product-card" style="text-align: left;">
+                <h3 style="color: #22c55e;">🛠️ Help & Support</h3>
+                <p style="color: #94a3b8; margin-top: 12px; font-size: 0.92rem;">
+                    Need help with commands, claims, payments, or server mechanics? Ask in the support discussion threads.
+                </p>
+            </div>
+
+            <div class="product-card" style="text-align: left;">
+                <h3 style="color: #38bdf8;">🏗️ Builds & Showcase</h3>
+                <p style="color: #94a3b8; margin-top: 12px; font-size: 0.92rem;">
+                    Post your base, town build, redstone contraptions, or survival ideas and get feedback from other players.
+                </p>
+            </div>
+        </div>
+
+        <section class="product-card" style="padding: 25px; margin-bottom: 40px;">
+            <h2 style="color: #f8fafc; margin-bottom: 18px; text-align: center;">🔥 Recent Forum Topics</h2>
+
+            <div style="display: grid; gap: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 16px 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div>
+                        <strong style="color: #f8fafc;">How do I claim land efficiently?</strong>
+                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.9rem;">Started by Steve_Gamer • 24 replies</p>
+                    </div>
+                    <span class="key common" style="padding: 8px 12px; font-size: 0.8rem;">Help</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 16px 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div>
+                        <strong style="color: #f8fafc;">Weekend build contest winners</strong>
+                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.9rem;">Started by END SPY • 18 replies</p>
+                    </div>
+                    <span class="key rare" style="padding: 8px 12px; font-size: 0.8rem;">Events</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 16px 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div>
+                        <strong style="color: #f8fafc;">Server economy guide for new players</strong>
+                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.9rem;">Started by Alex_Pro • 31 replies</p>
+                    </div>
+                    <span class="key legendary" style="padding: 8px 12px; font-size: 0.8rem;">Economy</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 16px 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div>
+                        <strong style="color: #f8fafc;">Showcase: My dragon arena redesign</strong>
+                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.9rem;">Started by Miner_49er • 12 replies</p>
+                    </div>
+                    <span class="key mythic" style="padding: 8px 12px; font-size: 0.8rem;">Showcase</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="product-card" style="text-align: center; padding: 30px 20px; margin-bottom: 40px;">
+            <h2 style="color: #38bdf8; margin-bottom: 10px;">📍 Community Rules</h2>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 20px;">
+                <span class="key common" style="font-size: 0.95rem; padding: 10px 14px;">Be respectful</span>
+                <span class="key rare" style="font-size: 0.95rem; padding: 10px 14px;">No spam</span>
+                <span class="key legendary" style="font-size: 0.95rem; padding: 10px 14px;">Share useful info</span>
+                <span class="key mythic" style="font-size: 0.95rem; padding: 10px 14px;">Support each other</span>
+            </div>
+        </section>
+    </main>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCartModal()">&times;</span>
+            <h2>Shopping Cart</h2>
+            <div id="cartItems" class="cart-items-container">
+                <p class="empty-cart">Your cart is empty</p>
+            </div>
+            <div id="cartTotal" class="cart-total" style="display: none;">
+                <h3>Total: <span id="totalPrice">₹0</span></h3>
+                <button class="checkout-all-btn" onclick="checkoutCart()">Checkout All Items</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCheckout()">&times;</span>
+            <h2>Complete Payment</h2>
+            <h3 id="modalItemTitle"></h3>
+            <div class="cart-summary" id="cartSummary"></div>
+            <img src="https://i.ibb.co/G3dzfN90/1000101649.jpg" alt="UPI QR Code" class="qr-image">
+            <p class="qr-sub">Scan using any UPI app (GPay, PhonePe, Paytm)</p>
+
+            <form id="payForm">
+                <input type="hidden" id="selectedItem">
+                <div class="form-group">
+                    <label for="username">Minecraft Username</label>
+                    <input type="text" id="username" placeholder="e.g. Steve_Gamer" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="utr">12-Digit UTR / Transaction ID</label>
+                    <input type="text" id="utr" placeholder="12-digit UTR number" pattern="[0-9]{12}" title="Must be exactly 12 numeric digits" required>
+                </div>
+
+                <button type="submit" id="submitBtn">Submit Payment Log</button>
+            </form>
+
+            <p id="msg"></p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-buttons">
+                <a href="https://discord.gg/EpnjfuHgjT" target="_blank" class="footer-btn discord-style">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-9.65 0 12.14 12.14 0 0 0-.609-1.25.076.076 0 0 0-.07 0 .07.07 0 0 0-.078.037A19.791 19.791 0 0 0 3.6 4.37a.074.074 0 0 0-.039.033C.32 8.59-.198 12.81.062 17.01a.09.09 0 0 0 .034.058 19.94 19.94 0 0 0 5.407 2.724.074.074 0 0 0 .082-.035c.416-.567.785-1.17 1.103-1.803a.074.074 0 0 0-.04-.105 13.21 13.21 0 0 1-1.887-.902.075.075 0 0 1-.004-.125l.4-.304a.074.074 0 0 1 .093-.006c3.726 1.706 7.76 1.706 11.45 0a.074.074 0 0 1 .093.006l.4.304a.075.075 0 0 1-.004.125 13.21 13.21 0 0 1-1.887.902.074.074 0 0 0-.04.105c.318.633.687 1.236 1.103 1.803a.074.074 0 0 0 .082.035 19.94 19.94 0 0 0 5.407-2.724.09.09 0 0 0 .034-.058c.26-4.2-.44-8.42-1.925-12.61a.074.074 0 0 0-.039-.033zM8.63 14.53c-1.12 0-2.04-.98-2.04-2.19s.9-2.19 2.04-2.19c1.14 0 2.05.99 2.04 2.19 0 1.21-.9 2.19-2.04 2.19zm6.74 0c-1.12 0-2.04-.98-2.04-2.19s.9-2.19 2.04-2.19c1.14 0 2.05.99 2.04 2.19 0 1.21-.9 2.19-2.04 2.19z"/>
+                    </svg>
+                    Join Discord
+                </a>
+                <a href="mailto:dioxsupport@gmail.com" class="footer-btn support-style">
+                    ✉ Support Email
+                </a>
+                <button class="footer-btn ip-style" onclick="copyIP()">
+                    📋 dioxide.pixelforge.gg
+                </button>
+            </div>
+
+            <div class="footer-disclaimer">
+                <p>&copy; 2026 Dioxide SMP. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

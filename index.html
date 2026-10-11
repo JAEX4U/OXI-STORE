@@ -13,12 +13,10 @@
         <div class="logo">⚡ DIOXIDE STORE</div>
         
         <div class="nav-right">
-            <!-- Shopping Cart -->
             <div class="cart-nav" onclick="openCartModal()">
                 🛒 Cart (<span id="cartCount">0</span>)
             </div>
 
-            <!-- 3-Line Hamburger Menu Button -->
             <div class="menu-container">
                 <button class="hamburger-btn" onclick="toggleDropdown()" aria-label="Toggle Navigation Menu">
                     <span class="bar"></span>
@@ -26,10 +24,10 @@
                     <span class="bar"></span>
                 </button>
                 
-                <!-- Dropdown Content -->
                 <div id="navDropdown" class="dropdown-menu">
                     <a href="index.html">Home</a>
                     <a href="store.html">Shop</a>
+                    <a href="forum.html">Forum</a>
                     <a href="help.html">Help</a>
                 </div>
             </div>
@@ -37,107 +35,90 @@
     </header>
 
     <main class="container">
-        <!-- Hero Home Banner -->
-        <section class="hero hero-immersive">
-            <div class="hero-logo">DIOXIDE SMP</div>
-            <p>The Ultimate Survival & Best Experience</p>
-            <div style="margin-top: 20px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <a href="store.html" class="buy-btn" style="text-decoration: none; padding: 12px 28px; font-size: 1.1rem;">Visit Store</a>
-                <button class="cart-btn" onclick="copyIP()" style="padding: 12px 28px; font-size: 1.1rem;">Copy Server IP</button>
-            </div>
+        <section class="hero hero-immersive" style="min-height: 280px;">
+            <div class="hero-logo" style="font-size: clamp(3rem, 10vw, 8rem);">DIOXIDE SMP</div>
+            <p>Community Forum & Player Discussions</p>
         </section>
 
-        <!-- Server Overview & Founder Info -->
-        <section class="info-section" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 16px; padding: 25px; margin-bottom: 30px; text-align: center;">
-            <h2 style="color: #8b5cf6; margin-bottom: 10px;">📜 Server Information</h2>
-            <p style="color: #cbd5e1; font-size: 1.05rem;">
-                Created on <strong>September 28, 2026</strong> by Founder <strong>END SPY</strong>.
-            </p>
-            <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 8px;">
-                Built to deliver a competitive yet community-focused SMP experience featuring player economies, customized crates, and constant events.
+        <section class="info-section" style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 16px; padding: 25px; margin-bottom: 30px;">
+            <h2 style="color: #8b5cf6; margin-bottom: 12px; text-align: center;">🗣️ Community Hub</h2>
+            <p style="color: #cbd5e1; text-align: center; line-height: 1.7; max-width: 800px; margin: 0 auto;">
+                Share builds, ask for help, trade ideas, discuss events, and stay updated with everything happening on the server.
             </p>
         </section>
 
-        <!-- Founder's Message -->
-        <section class="speech-box" style="background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(79, 70, 229, 0.2)); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 16px; padding: 25px; margin-bottom: 30px; text-align: center;">
-            <h3 style="color: #f8fafc; margin-bottom: 10px;">💬 Founder's Message</h3>
-            <blockquote style="font-style: italic; color: #e2e8f0; font-size: 1.05rem; max-width: 800px; margin: 0 auto;">
-                "Hello Player. Welcome to DIOXIDE SMP.Just one thing to say: grab your /kit and jump into the world. Also, try to dominate."
-            </blockquote>
-            <span style="display: block; margin-top: 10px; color: #a78bfa; font-weight: 700;">— END SPY</span>
-        </section>
-
-        <!-- In-Game Features Grid -->
-        <h2 style="color: #f8fafc; margin-bottom: 20px; text-align: center;">⚡ Core Gameplay Features</h2>
         <div class="store-grid active-content" style="margin-bottom: 40px;">
-            <div class="product-card">
-                <h3>💰 Player Economy</h3>
-                <p style="color: #94a3b8; margin: 15px 0; font-size: 0.95rem;">
-                    Earn money by selling resources, completing jobs, and trading directly with other players in a player-driven market.
+            <div class="product-card" style="text-align: left;">
+                <h3 style="color: #fbbf24;">📢 Announcements</h3>
+                <p style="color: #94a3b8; margin-top: 12px; font-size: 0.92rem;">
+                    Weekly updates, event alerts, admin messages, and new feature drops for the entire SMP community.
                 </p>
             </div>
 
-            <div class="product-card">
-                <h3>🛒 Server Shop & /ah</h3>
-                <p style="color: #94a3b8; margin: 15px 0; font-size: 0.95rem;">
-                    Browse the official in-game shop or list your rare items on the Auction House for bidding wars.
+            <div class="product-card" style="text-align: left;">
+                <h3 style="color: #22c55e;">🛠️ Help & Support</h3>
+                <p style="color: #94a3b8; margin-top: 12px; font-size: 0.92rem;">
+                    Need help with commands, claims, payments, or server mechanics? Ask in the support discussion threads.
                 </p>
             </div>
 
-            <div class="product-card">
-                <h3>📦 Kits & Crate Keys</h3>
-                <p style="color: #94a3b8; margin: 15px 0; font-size: 0.95rem;">
-                    Unlock starter kits to kickstart your journey or spin reward crates for enchanted gear and exclusive rewards.
+            <div class="product-card" style="text-align: left;">
+                <h3 style="color: #38bdf8;">🏗️ Builds & Showcase</h3>
+                <p style="color: #94a3b8; margin-top: 12px; font-size: 0.92rem;">
+                    Post your base, town build, redstone contraptions, or survival ideas and get feedback from other players.
                 </p>
             </div>
         </div>
 
-        <!-- Leaderboard & Events Section -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px;">
-            
-            <!-- Balance Leaderboard -->
-            <div class="product-card" style="text-align: left;">
-                <h3 style="text-align: center; color: #fbbf24;">🏆 Top Richest Players</h3>
-                <ul class="features" style="margin-top: 15px;">
-                    <li style="display: flex; justify-content: space-between;"><span>🥇 #1 END SPY</span> <strong>₹5,000,000</strong></li>
-                    <li style="display: flex; justify-content: space-between;"><span>🥈 #2 Steve_Gamer</span> <strong>₹3,250,000</strong></li>
-                    <li style="display: flex; justify-content: space-between;"><span>🥉 #3 Alex_Pro</span> <strong>₹1,800,000</strong></li>
-                    <li style="display: flex; justify-content: space-between;"><span>#4 Miner_49er</span> <strong>₹950,000</strong></li>
-                    <li style="display: flex; justify-content: space-between;"><span>#5 DragonSlayer</span> <strong>₹720,000</strong></li>
-                </ul>
-            </div>
+        <section class="product-card" style="padding: 25px; margin-bottom: 40px;">
+            <h2 style="color: #f8fafc; margin-bottom: 18px; text-align: center;">🔥 Recent Forum Topics</h2>
 
-            <!-- Server Events -->
-            <div class="product-card" style="text-align: left;">
-                <h3 style="text-align: center; color: #67e8f9;">🎉 Active & Upcoming Events</h3>
-                <div style="margin-top: 15px;">
-                    <div style="margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid rgba(148, 163, 184, 0.12);">
-                        <strong style="color: #f8fafc;">⚔️ End Dragon Fight Event</strong>
-                        <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 4px;">Join the server squad every Saturday at 7 PM IST to defeat the dragon for legendary drops!</p>
-                    </div>
+            <div style="display: grid; gap: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 16px 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
                     <div>
-                        <strong style="color: #f8fafc;">🔥 2x XP & Money Weekend</strong>
-                        <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 4px;">Boost your rank progression and earnings every Sunday!</p>
+                        <strong style="color: #f8fafc;">How do I claim land efficiently?</strong>
+                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.9rem;">Started by Steve_Gamer • 24 replies</p>
                     </div>
+                    <span class="key common" style="padding: 8px 12px; font-size: 0.8rem;">Help</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 16px 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div>
+                        <strong style="color: #f8fafc;">Weekend build contest winners</strong>
+                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.9rem;">Started by END SPY • 18 replies</p>
+                    </div>
+                    <span class="key rare" style="padding: 8px 12px; font-size: 0.8rem;">Events</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 16px 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div>
+                        <strong style="color: #f8fafc;">Server economy guide for new players</strong>
+                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.9rem;">Started by Alex_Pro • 31 replies</p>
+                    </div>
+                    <span class="key legendary" style="padding: 8px 12px; font-size: 0.8rem;">Economy</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 16px 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div>
+                        <strong style="color: #f8fafc;">Showcase: My dragon arena redesign</strong>
+                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.9rem;">Started by Miner_49er • 12 replies</p>
+                    </div>
+                    <span class="key mythic" style="padding: 8px 12px; font-size: 0.8rem;">Showcase</span>
                 </div>
             </div>
+        </section>
 
-        </div>
-
-        <!-- Useful Commands Section -->
-        <section class="product-card" style="text-align: center; margin-bottom: 40px;">
-            <h2 style="color: #8b5cf6; margin-bottom: 15px;">⌨️ Useful In-Game Commands</h2>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 15px;">
-                <span class="key common" style="font-size: 1rem; padding: 8px 14px;">/rtp - Random Teleport</span>
-                <span class="key rare" style="font-size: 1rem; padding: 8px 14px;">/shop - Open Server Shop</span>
-                <span class="key legendary" style="font-size: 1rem; padding: 8px 14px;">/ah - Auction House</span>
-                <span class="key mythic" style="font-size: 1rem; padding: 8px 14px;">/home - Teleport Home</span>
-                <span class="key colossal" style="font-size: 1rem; padding: 8px 14px;">/tp - Teleport Request</span>
+        <section class="product-card" style="text-align: center; padding: 30px 20px; margin-bottom: 40px;">
+            <h2 style="color: #38bdf8; margin-bottom: 10px;">📍 Community Rules</h2>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 20px;">
+                <span class="key common" style="font-size: 0.95rem; padding: 10px 14px;">Be respectful</span>
+                <span class="key rare" style="font-size: 0.95rem; padding: 10px 14px;">No spam</span>
+                <span class="key legendary" style="font-size: 0.95rem; padding: 10px 14px;">Share useful info</span>
+                <span class="key mythic" style="font-size: 0.95rem; padding: 10px 14px;">Support each other</span>
             </div>
         </section>
     </main>
 
-    <!-- Shopping Cart Modal -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeCartModal()">&times;</span>
@@ -152,7 +133,6 @@
         </div>
     </div>
 
-    <!-- Payment Modal -->
     <div id="paymentModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeCheckout()">&times;</span>
@@ -186,7 +166,7 @@
             <div class="footer-buttons">
                 <a href="https://discord.gg/EpnjfuHgjT" target="_blank" class="footer-btn discord-style">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-9.65 0 12.14 12.14 0 0 0-.609-1.25.076.076 0 0 0-.079-.037A19.736 19.736 0 0 0 3.683 4.37a.077.077 0 0 0-.036.026C.8 8.438 0 12.45 0 16.416a.078.078 0 0 0 .026.055c1.618 1.199 3.183 1.924 4.713 2.406a.08.08 0 0 0 .086-.028c.362-.495.684-1.02.96-1.573a.076.076 0 0 0-.041-.106 12.727 12.727 0 0 1-1.823-.874.078.078 0 0 1-.004-.13c.122-.09.245-.184.362-.282a.078.078 0 0 1 .082-.013c3.818 1.74 7.95 1.74 11.705 0a.078.078 0 0 1 .082.013c.117.098.24.192.362.282a.078.078 0 0 1-.004.13 12.727 12.727 0 0 1-1.823.874.076.076 0 0 0-.041.106c.276.553.598 1.078.96 1.573a.08.08 0 0 0 .086.028c1.53-.482 3.095-1.207 4.713-2.406a.078.078 0 0 0 .026-.055c0-3.966-.8-7.978-2.282-12.019a.077.077 0 0 0-.036-.026ZM8.92 14.208c-.924 0-1.683-.84-1.683-1.872 0-1.031.748-1.872 1.683-1.872.94 0 1.692.846 1.683 1.872 0 1.032-.748 1.872-1.683 1.872Zm6.16 0c-.924 0-1.683-.84-1.683-1.872 0-1.031.748-1.872 1.683-1.872.94 0 1.692.846 1.683 1.872 0 1.032-.748 1.872-1.683 1.872Z"/>
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-9.65 0 12.14 12.14 0 0 0-.609-1.25.076.076 0 0 0-.07 0 .07.07 0 0 0-.078.037A19.791 19.791 0 0 0 3.6 4.37a.074.074 0 0 0-.039.033C.32 8.59-.198 12.81.062 17.01a.09.09 0 0 0 .034.058 19.94 19.94 0 0 0 5.407 2.724.074.074 0 0 0 .082-.035c.416-.567.785-1.17 1.103-1.803a.074.074 0 0 0-.04-.105 13.21 13.21 0 0 1-1.887-.902.075.075 0 0 1-.004-.125l.4-.304a.074.074 0 0 1 .093-.006c3.726 1.706 7.76 1.706 11.45 0a.074.074 0 0 1 .093.006l.4.304a.075.075 0 0 1-.004.125 13.21 13.21 0 0 1-1.887.902.074.074 0 0 0-.04.105c.318.633.687 1.236 1.103 1.803a.074.074 0 0 0 .082.035 19.94 19.94 0 0 0 5.407-2.724.09.09 0 0 0 .034-.058c.26-4.2-.44-8.42-1.925-12.61a.074.074 0 0 0-.039-.033zM8.63 14.53c-1.12 0-2.04-.98-2.04-2.19s.9-2.19 2.04-2.19c1.14 0 2.05.99 2.04 2.19 0 1.21-.9 2.19-2.04 2.19zm6.74 0c-1.12 0-2.04-.98-2.04-2.19s.9-2.19 2.04-2.19c1.14 0 2.05.99 2.04 2.19 0 1.21-.9 2.19-2.04 2.19z"/>
                     </svg>
                     Join Discord
                 </a>
