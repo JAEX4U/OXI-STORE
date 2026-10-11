@@ -38,12 +38,17 @@
     </header>
 
     <main class="container">
-        <!-- Hero Help Banner -->
-
-
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('ranks')">Ranks</button>
-            <button class="tab-btn" onclick="switchTab('keys')">Crate Keys</button>
+        <!-- Modernized Tab Selector -->
+        <div class="store-tabs-wrapper" style="text-align: center; margin: 40px 0 30px;">
+            <p style="color: #94a3b8; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; font-weight: 700;">Select Store Category</p>
+            <div class="tabs" style="display: inline-flex; background: rgba(15, 23, 42, 0.7); padding: 6px; border-radius: 14px; border: 1px solid rgba(148, 163, 184, 0.2); backdrop-filter: blur(8px); box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+                <button class="tab-btn active" onclick="switchTab('ranks')" style="display: flex; align-items: center; gap: 8px; border: none; font-size: 0.95rem;">
+                    <span>👑</span> Server Ranks
+                </button>
+                <button class="tab-btn" onclick="switchTab('keys')" style="display: flex; align-items: center; gap: 8px; border: none; font-size: 0.95rem;">
+                    <span>🔑</span> Crate Keys
+                </button>
+            </div>
         </div>
 
         <div id="ranks" class="store-grid active-content">
@@ -230,7 +235,7 @@
         </div>
     </div>
 
-        <footer class="footer">
+    <footer class="footer">
         <div class="footer-container">
             <div class="footer-brand">
                 ⚡ DIOXIDE STORE                
@@ -255,7 +260,7 @@
                 <p>&copy; 2026 Dioxide SMP. All rights reserved.</p>
             </div>
         </div>
-        </footer>
+    </footer>
 
     <script src="script.js"></script>
 </body>
