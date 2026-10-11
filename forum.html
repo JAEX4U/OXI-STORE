@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dioxide Store | Forum</title>
+    <title>Dioxide Network | Forum Broadcast</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header class="navbar">
-        <div class="logo">DIOXIDE FORUM</div>
+        <div class="logo">⚡ DIOXIDE FORUM</div>
 
         <div class="nav-right">
             <div class="cart-nav" onclick="openCartModal()">
@@ -36,85 +36,95 @@
 
     <main class="container">
 
-        <section class="info-section" style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 16px; padding: 25px; margin-bottom: 30px;">
-            <h2 style="color: #8b5cf6; margin-bottom: 12px; text-align: center;">🗣️ Community Hub</h2>
-            <p style="color: #cbd5e1; text-align: center; line-height: 1.7; max-width: 800px; margin: 0 auto;">
-                Share builds, ask for help, trade ideas, discuss events, and stay updated with everything happening on the server.
-            </p>
+        <!-- Hero Forum Banner -->
+        <section class="hero hero-immersive" style="min-height: 240px; padding: 20px 0;">
+            <div class="hero-logo" style="font-size: clamp(3rem, 9vw, 7rem); color: rgba(139, 92, 246, 0.92);">COMMUNITY HUB</div>
+            <p>System Broadcasts, Logs & Discussion Threads</p>
         </section>
 
+        <!-- Category Grid -->
         <div class="store-grid active-content" style="margin-bottom: 40px;">
-            <div class="product-card" style="text-align: left;">
-                <h3 style="color: #fbbf24;">📢 Announcements</h3>
+            <div class="product-card" style="border-left: 4px solid #fbbf24; text-align: left;">
+                <span class="badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24;">BROADCAST</span>
+                <h3 style="color: #fbbf24; margin-top: 10px;">📢 Announcements</h3>
                 <p style="color: #94a3b8; margin-top: 12px; font-size: 0.92rem;">
-                    Weekly updates, event alerts, admin messages, and new feature drops for the entire SMP community.
+                    Weekly network patches, event alerts, core directives, and feature updates deployed directly by command staff.
                 </p>
             </div>
 
-            <div class="product-card" style="text-align: left;">
-                <h3 style="color: #22c55e;">🛠️ Help & Support</h3>
+            <div class="product-card" style="border-left: 4px solid #22c55e; text-align: left;">
+                <span class="badge" style="background: rgba(34, 197, 94, 0.2); color: #22c55e;">SUPPORT</span>
+                <h3 style="color: #22c55e; margin-top: 10px;">🛠️ Help & Support</h3>
                 <p style="color: #94a3b8; margin-top: 12px; font-size: 0.92rem;">
-                    Need help with commands, claims, payments, or server mechanics? Ask in the support discussion threads.
+                    Submit troubleshooting queries regarding claims, teleport mechanics, transaction logs, or server errors.
                 </p>
             </div>
 
-            <div class="product-card" style="text-align: left;">
-                <h3 style="color: #38bdf8;">🏗️ Builds & Showcase</h3>
+            <div class="product-card" style="border-left: 4px solid #38bdf8; text-align: left;">
+                <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">ARCHIVE</span>
+                <h3 style="color: #38bdf8; margin-top: 10px;">🏗️ Builds & Showcase</h3>
                 <p style="color: #94a3b8; margin-top: 12px; font-size: 0.92rem;">
-                    Post your base, town build, redstone contraptions, or survival ideas and get feedback from other players.
+                    Display structural blueprints, survival bases, redstone automation arrays, and tactical landscape designs.
                 </p>
             </div>
         </div>
 
-        <section class="product-card" style="padding: 25px; margin-bottom: 40px;">
-            <h2 style="color: #f8fafc; margin-bottom: 18px; text-align: center;">🔥 Recent Forum Topics</h2>
+        <!-- Active Topics Feed -->
+        <section class="product-card" style="padding: 30px; margin-bottom: 40px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                <h2 style="color: #f8fafc; font-size: 1.4rem;">⚡ Active System Logs & Threads</h2>
+                <span class="key legendary" style="font-size: 0.8rem; padding: 6px 12px;">Live Feed</span>
+            </div>
 
             <div style="display: grid; gap: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 16px 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.7); transition: 0.2s;">
                     <div>
-                        <strong style="color: #f8fafc;">How do I claim land efficiently?</strong>
-                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.9rem;">Started by Steve_Gamer • 24 replies</p>
+                        <strong style="color: #f8fafc; font-size: 1.05rem;">How do I claim land efficiently?</strong>
+                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.85rem;">Origin: Steve_Gamer • 24 responses recorded</p>
                     </div>
-                    <span class="key common" style="padding: 8px 12px; font-size: 0.8rem;">Help</span>
+                    <span class="key common" style="padding: 6px 12px; font-size: 0.75rem; white-space: nowrap;">Help</span>
                 </div>
 
-                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 16px 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.7); transition: 0.2s;">
                     <div>
-                        <strong style="color: #f8fafc;">Weekend build contest winners</strong>
-                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.9rem;">Started by END SPY • 18 replies</p>
+                        <strong style="color: #f8fafc; font-size: 1.05rem;">Weekend build contest winners</strong>
+                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.85rem;">Origin: END SPY • 18 responses recorded</p>
                     </div>
-                    <span class="key rare" style="padding: 8px 12px; font-size: 0.8rem;">Events</span>
+                    <span class="key rare" style="padding: 6px 12px; font-size: 0.75rem; white-space: nowrap;">Events</span>
                 </div>
 
-                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 16px 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.7); transition: 0.2s;">
                     <div>
-                        <strong style="color: #f8fafc;">Server economy guide for new players</strong>
-                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.9rem;">Started by Alex_Pro • 31 replies</p>
+                        <strong style="color: #f8fafc; font-size: 1.05rem;">Server economy guide for new players</strong>
+                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.85rem;">Origin: Alex_Pro • 31 responses recorded</p>
                     </div>
-                    <span class="key legendary" style="padding: 8px 12px; font-size: 0.8rem;">Economy</span>
+                    <span class="key legendary" style="padding: 6px 12px; font-size: 0.75rem; white-space: nowrap;">Economy</span>
                 </div>
 
-                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 16px 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 18px; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; background: rgba(15, 23, 42, 0.7); transition: 0.2s;">
                     <div>
-                        <strong style="color: #f8fafc;">Showcase: My dragon arena redesign</strong>
-                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.9rem;">Started by Miner_49er • 12 replies</p>
+                        <strong style="color: #f8fafc; font-size: 1.05rem;">Showcase: My dragon arena redesign</strong>
+                        <p style="color: #94a3b8; margin: 6px 0 0; font-size: 0.85rem;">Origin: Miner_49er • 12 responses recorded</p>
                     </div>
-                    <span class="key mythic" style="padding: 8px 12px; font-size: 0.8rem;">Showcase</span>
+                    <span class="key mythic" style="padding: 6px 12px; font-size: 0.75rem; white-space: nowrap;">Showcase</span>
                 </div>
             </div>
         </section>
 
-        <section class="product-card" style="text-align: center; padding: 30px 20px; margin-bottom: 40px;">
-            <h2 style="color: #38bdf8; margin-bottom: 10px;">📍 Community Rules</h2>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 20px;">
-                <span class="key common" style="font-size: 0.95rem; padding: 10px 14px;">Be respectful</span>
-                <span class="key rare" style="font-size: 0.95rem; padding: 10px 14px;">No spam</span>
-                <span class="key legendary" style="font-size: 0.95rem; padding: 10px 14px;">Share useful info</span>
-                <span class="key mythic" style="font-size: 0.95rem; padding: 10px 14px;">Support each other</span>
+        <!-- Network Protocols / Rules -->
+        <section class="product-card" style="text-align: center; padding: 35px 20px; margin-bottom: 40px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));">
+            <h2 style="color: #38bdf8; margin-bottom: 10px;">🔒 Network Communication Protocols</h2>
+            <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 20px;">All transmitted data and interactions within this hub must abide by standard system parameters.</p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
+                <span class="key common" style="font-size: 0.9rem; padding: 8px 14px;">Maintain Discipline</span>
+                <span class="key rare" style="font-size: 0.9rem; padding: 8px 14px;">Zero Spam Tolerance</span>
+                <span class="key legendary" style="font-size: 0.9rem; padding: 8px 14px;">Verify Intel Before Posting</span>
+                <span class="key mythic" style="font-size: 0.9rem; padding: 8px 14px;">Assist Allied Units</span>
             </div>
         </section>
     </main>
 
+    <!-- Shopping Cart Modal -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeCartModal()">&times;</span>
@@ -129,6 +139,7 @@
         </div>
     </div>
 
+    <!-- Payment Modal -->
     <div id="paymentModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeCheckout()">&times;</span>
@@ -156,6 +167,7 @@
             <p id="msg"></p>
         </div>
     </div>
+
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-brand">
@@ -182,7 +194,6 @@
             </div>
         </div>
     </footer>
-
 
     <script src="script.js"></script>
 </body>
