@@ -4,6 +4,8 @@
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUKKj6Hr8xAHyX42avjCDvzL6lYXDUZ-z0lJoytW1_O6dJs_3Cus8WcE0EV1jIcBf0Cw/exec";
 
 let cart = JSON.parse(localStorage.getItem('storeCart')) || [];
+let currentThreadElement = null;
+let threadReplies = {};
 
 window.addEventListener('load', () => {
     updateCartUI();
@@ -298,7 +300,7 @@ function handlePaymentSubmit(e) {
 }
 
 /* ==========================================================================
-   Forum Filtering & Star Interactions
+   Forum Filtering & Interactive Thread Controls
    ========================================================================== */
 function filterForum(category, element) {
     document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
@@ -344,4 +346,142 @@ function toggleStar(starElement) {
     } else {
         showToast("Thread unstarred.");
     }
+}
+
+// New Thread Modal
+function openNewThreadModal() {
+    const modal = document.getElementById('newThreadModal');
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeNewThreadModal() {
+    const modal = document.getElementById('newThreadModal');
+    if (modal) modal.style.display = 'none';
+    const form = document.getElementById('newThreadForm');
+    if (form) form.reset();
+}
+
+function submitNewThread(e) {
+    e.preventDefault();
+    const author = document.getElementById('postAuthor').value;
+    const category = document.getElementById('postCategory').value;
+    const title = document.getElementById('postTitle').value;
+    const body = document.getElementById('postBody').value;
+
+    const categoryLabels = {
+        'announcements': '📢 Announcements',
+        'help': '🛠️ Help & Suggestions',
+        'showcase': '🏗️ Base Showcases',
+        'economy': '💰 Economy & Trading',
+        'rules': '📜 Directives & Rules'
+    };
+
+    const threadList = document.getElementById('threadList');
+    if (!threadList) return;
+
+    const newRow = document.createElement('article');
+    newRow.className = 'thread-row';
+    newRow.setAttribute('data-category', category);
+    newRow.setAttribute('data-answered', 'false');
+
+    const initial = author.charAt(0).toUpperCase();
+
+    newRow.innerHTML = `
+        <div class="thread-left">
+            <button class="star-icon" onclick="toggleStar(this)">★</button>
+            <div class="thread-content-box">
+                <div class="thread-title" onclick="openThreadModal(this, '${title}', '${author}', '${categoryLabels[category]}', '${body}')">${title}</div>
+                <div class="thread-meta">
+                    <span class="avatar-small">${initial}</span>
+                    <span style="color:#a78bfa; font-weight:700;">${author}</span>
+                    <span>•</span>
+                    <span>${categoryLabels[category]}</span>
+                    <span>•</span>
+                    <span class="reply-count">💬 0 replies</span>
+                </div>
+                <button class="read-more-btn" onclick="openThreadModal(this.parentElement, '${title}', '${author}', '${categoryLabels[category]}', '${body}')" style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); color: #38bdf8; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; margin-top: 8px;">📖 Read & Reply</button>
+            </div>
+        </div>
+        <div class="thread-right">
+            <span>Just now</span>
+        </div>
+    `;
+
+    threadList.prepend(newRow);
+    closeNewThreadModal();
+    showToast('Thread posted successfully!');
+}
+
+// Read & Reply Thread Modal
+function openThreadModal(element, title, author, category, content) {
+    currentThreadElement = element.closest('.thread-row');
+    
+    document.getElementById('modalThreadTitle').innerText = title;
+    document.getElementById('modalThreadAuthor').innerText = `Posted by ${author}`;
+    document.getElementById('modalCategoryBadge').innerText = category;
+    document.getElementById('modalThreadContent').innerText = content;
+
+    renderReplies(title);
+    document.getElementById('threadModal').style.display = 'flex';
+}
+
+function closeThreadModal() {
+    document.getElementById('threadModal').style.display = 'none';
+    const replyForm = document.getElementById('replyForm');
+    if (replyForm) replyForm.reset();
+}
+
+function renderReplies(threadTitle) {
+    const replyContainer = document.getElementById('replyContainer');
+    if (!replyContainer) return;
+
+    const replies = threadReplies[threadTitle] || [];
+    
+    const replyCountHeader = document.getElementById('replyCountHeader');
+    if (replyCountHeader) replyCountHeader.innerText = replies.length;
+
+    if (replies.length === 0) {
+        replyContainer.innerHTML = '<p style="color: #64748b; font-size: 0.85rem; font-style: italic;">No replies yet. Be the first to respond!</p>';
+    } else {
+        replyContainer.innerHTML = replies.map(r => `
+            <div class="reply-box">
+                <div class="reply-header">
+                    <strong style="color: #38bdf8;">${r.author}</strong>
+                    <span>${r.time}</span>
+                </div>
+                <div class="reply-text">${r.text}</div>
+            </div>
+        `).join('');
     }
+}
+
+function submitReply(e) {
+    e.preventDefault();
+    const title = document.getElementById('modalThreadTitle').innerText;
+    const author = document.getElementById('replyAuthor').value;
+    const text = document.getElementById('replyText').value;
+
+    if (!threadReplies[title]) {
+        threadReplies[title] = [];
+    }
+
+    threadReplies[title].push({
+        author: author,
+        text: text,
+        time: 'Just now'
+    });
+
+    renderReplies(title);
+    document.getElementById('replyText').value = '';
+
+    if (currentThreadElement) {
+        const countBadge = currentThreadElement.querySelector('.reply-count');
+        if (countBadge) {
+            countBadge.innerText = `💬 ${threadReplies[title].length} replies`;
+        }
+        currentThreadElement.setAttribute('data-answered', 'true');
+    }
+
+    showToast('Reply added!');
+       }
+                   
