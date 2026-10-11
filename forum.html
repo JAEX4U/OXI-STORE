@@ -131,6 +131,8 @@
             font-size: 1.1rem;
             cursor: pointer;
             transition: color 0.2s;
+            background: none;
+            border: none;
         }
 
         .star-icon.starred {
@@ -264,12 +266,12 @@
             <aside class="forum-sidebar">
                 <div class="sidebar-title">Categories</div>
                 <ul class="category-list">
-                    <li class="category-item active"><a onclick="filterForum('all', this)"><span>All Threads</span> <span class="cat-count" id="count-all">6</span></a></li>
-                    <li class="category-item"><a onclick="filterForum('announcements', this)"><span>📢 Announcements</span> <span class="cat-count" id="count-announcements">1</span></a></li>
-                    <li class="category-item"><a onclick="filterForum('help', this)"><span>🛠️ Help & Suggestions</span> <span class="cat-count" id="count-help">2</span></a></li>
-                    <li class="category-item"><a onclick="filterForum('showcase', this)"><span>🏗️ Base Showcases</span> <span class="cat-count" id="count-showcase">1</span></a></li>
-                    <li class="category-item"><a onclick="filterForum('economy', this)"><span>💰 Economy & Trading</span> <span class="cat-count" id="count-economy">1</span></a></li>
-                    <li class="category-item"><a onclick="filterForum('rules', this)"><span>📜 Directives & Rules</span> <span class="cat-count" id="count-rules">1</span></a></li>
+                    <li class="category-item active"><a onclick="filterForum('all', this)"><span>All Threads</span> <span class="cat-count">6</span></a></li>
+                    <li class="category-item"><a onclick="filterForum('announcements', this)"><span>📢 Announcements</span> <span class="cat-count">1</span></a></li>
+                    <li class="category-item"><a onclick="filterForum('help', this)"><span>🛠️ Help & Suggestions</span> <span class="cat-count">2</span></a></li>
+                    <li class="category-item"><a onclick="filterForum('showcase', this)"><span>🏗️ Base Showcases</span> <span class="cat-count">1</span></a></li>
+                    <li class="category-item"><a onclick="filterForum('economy', this)"><span>💰 Economy & Trading</span> <span class="cat-count">1</span></a></li>
+                    <li class="category-item"><a onclick="filterForum('rules', this)"><span>📜 Directives & Rules</span> <span class="cat-count">1</span></a></li>
                 </ul>
             </aside>
 
@@ -284,8 +286,8 @@
                     </div>
 
                     <div class="filter-group">
-                        <a class="filter-tab active">Latest</a>
-                        <a class="filter-tab">Popular</a>
+                        <a class="filter-tab active" onclick="showToast('Showing Latest Threads')">Latest</a>
+                        <a class="filter-tab" onclick="showToast('Showing Popular Threads')">Popular</a>
                     </div>
                 </div>
 
@@ -294,7 +296,7 @@
                     
                     <div class="thread-row" data-category="help" data-answered="true">
                         <div class="thread-left">
-                            <span class="star-icon" onclick="toggleStar(this)">★</span>
+                            <button class="star-icon" onclick="toggleStar(this)">★</button>
                             <div>
                                 <a href="#" class="thread-title">Optimal land claim boundaries to prevent raid loss</a>
                                 <div class="thread-meta">
@@ -314,7 +316,7 @@
 
                     <div class="thread-row" data-category="help" data-answered="false">
                         <div class="thread-left">
-                            <span class="star-icon starred" onclick="toggleStar(this)">★</span>
+                            <button class="star-icon starred" onclick="toggleStar(this)">★</button>
                             <div>
                                 <a href="#" class="thread-title">Help & Suggestions: Crate Key delivery verification process</a>
                                 <div class="thread-meta">
@@ -334,7 +336,7 @@
 
                     <div class="thread-row" data-category="economy" data-answered="true">
                         <div class="thread-left">
-                            <span class="star-icon" onclick="toggleStar(this)">★</span>
+                            <button class="star-icon" onclick="toggleStar(this)">★</button>
                             <div>
                                 <a href="#" class="thread-title">Server Economy Guide: How to maximize /ah earnings</a>
                                 <div class="thread-meta">
@@ -354,7 +356,7 @@
 
                     <div class="thread-row" data-category="announcements" data-answered="true">
                         <div class="thread-left">
-                            <span class="star-icon starred" onclick="toggleStar(this)">★</span>
+                            <button class="star-icon starred" onclick="toggleStar(this)">★</button>
                             <div>
                                 <a href="#" class="thread-title">Dioxide SMP Season 1 Opening Broadcast</a>
                                 <div class="thread-meta">
@@ -374,7 +376,7 @@
 
                     <div class="thread-row" data-category="showcase" data-answered="true">
                         <div class="thread-left">
-                            <span class="star-icon" onclick="toggleStar(this)">★</span>
+                            <button class="star-icon" onclick="toggleStar(this)">★</button>
                             <div>
                                 <a href="#" class="thread-title">Showcase: Underground Netherite Vault & Automatic Alarms</a>
                                 <div class="thread-meta">
@@ -394,7 +396,7 @@
 
                     <div class="thread-row" data-category="rules" data-answered="false">
                         <div class="thread-left">
-                            <span class="star-icon starred" onclick="toggleStar(this)">★</span>
+                            <button class="star-icon starred" onclick="toggleStar(this)">★</button>
                             <div>
                                 <a href="#" class="thread-title">Directives: Updated claim block decay rules for inactive players</a>
                                 <div class="thread-meta">
@@ -416,9 +418,9 @@
 
                 <!-- Bottom Pagination Controls -->
                 <div class="pagination-container">
-                    <button class="page-btn">OLDER THREADS</button>
+                    <button class="page-btn" onclick="showToast('Already on first page')">OLDER THREADS</button>
                     <span class="page-info">PAGE <strong style="color: #f8fafc;">1</strong> OF <strong style="color: #f8fafc;">1</strong></span>
-                    <button class="page-btn">NEWER THREADS</button>
+                    <button class="page-btn" onclick="showToast('No newer threads available')">NEWER THREADS</button>
                 </div>
 
             </section>
@@ -461,18 +463,14 @@
         </div>
     </footer>
 
-    <!-- Category & Tab Filtering Script -->
+    <!-- Forum Filtering Script -->
     <script>
         function filterForum(category, element) {
-            // Update Active Sidebar Highlight
             document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
-            if (element) {
+            if (element && element.parentElement) {
                 element.parentElement.classList.add('active');
             }
 
-            // Filter Thread Rows
             const threads = document.querySelectorAll('.thread-row');
             threads.forEach(thread => {
-                if (category === 'all' || thread.getAttribute('data-category') === category) {
-                    thread.style.display = 'flex';
-    
+                const threadCat = thread.getAttribute('    
