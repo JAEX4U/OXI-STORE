@@ -1052,3 +1052,75 @@ body::after {
 
     .cart-item-info h4 {
         f
+
+
+/* ==========================================================================
+   Fix Mobile Text Overflow & Truncation
+   ========================================================================== */
+.thread-row {
+    overflow: hidden;
+    word-break: break-word;
+}
+
+.thread-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    max-width: 100%;
+}
+
+.thread-meta {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    font-size: 0.8rem;
+}
+
+.meta-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* "Read More" Button Style */
+.read-more-btn {
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #38bdf8;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 6px;
+    display: inline-block;
+}
+
+.read-more-btn:hover {
+    background: rgba(56, 189, 248, 0.25);
+    color: #f8fafc;
+}
+
+/* Full Thread View Modal */
+#threadModal .modal-content {
+    text-align: left;
+    max-width: 600px;
+}
+
+#threadModalBody p {
+    color: #cbd5e1;
+    line-height: 1.7;
+    margin-top: 12px;
+    font-size: 0.95rem;
+}
+
+/* Mobile Category List Overflow Fix */
+.category-item a {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+        }
+        
