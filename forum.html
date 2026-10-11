@@ -100,8 +100,8 @@
                         <a class="filter-tab" onclick="filterTab('unanswered', this)">Unanswered</a>
                     </div>
                     <div class="filter-group">
-                        <span class="filter-tab active">Latest</span>
-                        <span class="filter-tab">Popular</span>
+                        <span class="filter-tab active" onclick="showToast('Showing Latest Threads')">Latest</span>
+                        <span class="filter-tab" onclick="showToast('Showing Popular Threads')">Popular</span>
                     </div>
                 </div>
 
@@ -112,7 +112,7 @@
                     <article class="thread-row" data-category="announcements" data-answered="true">
                         <div class="thread-left">
                             <button class="star-icon" onclick="toggleStar(this)">★</button>
-                            <div>
+                            <div class="thread-content-box">
                                 <a href="#" class="thread-title">[UPDATE] Season 4 Patch 4.2 - Nether Revamp & Custom Enchants</a>
                                 <div class="thread-meta">
                                     <span class="avatar-small">A</span>
@@ -134,7 +134,7 @@
                     <article class="thread-row" data-category="rules" data-answered="true">
                         <div class="thread-left">
                             <button class="star-icon" onclick="toggleStar(this)">★</button>
-                            <div>
+                            <div class="thread-content-box">
                                 <a href="#" class="thread-title">Server Rules & Punishment Directives [Updated 2026]</a>
                                 <div class="thread-meta">
                                     <span class="avatar-small" style="background:#ef4444;">M</span>
@@ -156,7 +156,7 @@
                     <article class="thread-row" data-category="help" data-answered="false">
                         <div class="thread-left">
                             <button class="star-icon" onclick="toggleStar(this)">★</button>
-                            <div>
+                            <div class="thread-content-box">
                                 <a href="#" class="thread-title">How do I claim land in the new Colossal Biome expansion?</a>
                                 <div class="thread-meta">
                                     <span class="avatar-small" style="background:#3b82f6;">N</span>
@@ -178,7 +178,7 @@
                     <article class="thread-row" data-category="showcases" data-answered="true">
                         <div class="thread-left">
                             <button class="star-icon" onclick="toggleStar(this)">★</button>
-                            <div>
+                            <div class="thread-content-box">
                                 <a href="#" class="thread-title">[SHOWCASE] Cyberpunk Mega-City Megabuild (100+ Hours)</a>
                                 <div class="thread-meta">
                                     <span class="avatar-small" style="background:#ec4899;">V</span>
@@ -200,7 +200,7 @@
                     <article class="thread-row" data-category="trading" data-answered="true">
                         <div class="thread-left">
                             <button class="star-icon" onclick="toggleStar(this)">★</button>
-                            <div>
+                            <div class="thread-content-box">
                                 <a href="#" class="thread-title">[BUYING] Bulk Mythic Crate Keys - Offering Diamonds / In-game Cash</a>
                                 <div class="thread-meta">
                                     <span class="avatar-small" style="background:#10b981;">C</span>
@@ -222,7 +222,7 @@
                     <article class="thread-row" data-category="help" data-answered="false">
                         <div class="thread-left">
                             <button class="star-icon" onclick="toggleStar(this)">★</button>
-                            <div>
+                            <div class="thread-content-box">
                                 <a href="#" class="thread-title">Suggestion: Add automatic shop chest organization plugins</a>
                                 <div class="thread-meta">
                                     <span class="avatar-small" style="background:#06b6d4;">Z</span>
@@ -244,9 +244,9 @@
 
                 <!-- Pagination Controls -->
                 <div class="pagination-container">
-                    <button class="page-btn">OLDER THREADS</button>
+                    <button class="page-btn" onclick="showToast('Already on first page')">OLDER THREADS</button>
                     <span class="page-info">PAGE 1 OF 1</span>
-                    <button class="page-btn">NEWER THREADS</button>
+                    <button class="page-btn" onclick="showToast('No newer threads available')">NEWER THREADS</button>
                 </div>
             </section>
         </div>
@@ -298,7 +298,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-buttons">
-            <a href="https://discord.gg" target="_blank" rel="noopener" class="footer-btn discord-style">
+            <a href="https://discord.gg/EpnjfuHgjT" target="_blank" rel="noopener" class="footer-btn discord-style">
                 💬 Join Discord
             </a>
             <a href="mailto:support@dioxide.pixelforge.gg" class="footer-btn support-style">
@@ -313,7 +313,7 @@
         </p>
     </footer>
 
-    <!-- Fallback Inline Script for Filtering Logic -->
+    <!-- Filtering Script -->
     <script>
         function filterForum(category, element) {
             document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
@@ -333,8 +333,12 @@
         }
 
         function filterTab(type, element) {
-            const tabs = document.querySelectorAll('.filter-tab');
-            tabs.forEach(tab => tab.classList.remove('active'));
+            const tabs = document.querySelectorAll('.filter-group .filter-tab');
+            tabs.forEach(tab => {
+                if (tab.textContent.includes('All Threads') || tab.textContent.includes('Unanswered')) {
+                    tab.classList.remove('active');
+                }
+            });
             if (element) element.classList.add('active');
 
             const threads = document.querySelectorAll('.thread-row');
@@ -364,7 +368,8 @@
         }
     </script>
 
-    <!-- Main Logic Script -->
+    <!-- Main Global Logic Script -->
     <script src="script.js"></script>
 </body>
-</html>
+    </html>
+    
