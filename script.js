@@ -1,3 +1,6 @@
+/* ==========================================================================
+   Configuration & State
+   ========================================================================== */
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUKKj6Hr8xAHyX42avjCDvzL6lYXDUZ-z0lJoytW1_O6dJs_3Cus8WcE0EV1jIcBf0Cw/exec";
 
 let cart = JSON.parse(localStorage.getItem('storeCart')) || [];
@@ -5,7 +8,7 @@ let cart = JSON.parse(localStorage.getItem('storeCart')) || [];
 window.addEventListener('load', () => {
     updateCartUI();
     
-    // Attach form submit listener safely if element exists
+    // Attach payment form submit listener safely if element exists
     const payForm = document.getElementById('payForm');
     if (payForm) {
         payForm.addEventListener('submit', handlePaymentSubmit);
@@ -230,10 +233,15 @@ function copyIP() {
 }
 
 function showToast(message) {
-    const toast = document.createElement('div');
-    toast.className = 'toast-notification';
+    let toast = document.querySelector('.toast-notification');
+    
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        document.body.appendChild(toast);
+    }
+    
     toast.innerText = message;
-    document.body.appendChild(toast);
 
     setTimeout(() => {
         toast.classList.add('show');
@@ -241,7 +249,6 @@ function showToast(message) {
 
     setTimeout(() => {
         toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
     }, 2500);
 }
 
@@ -288,4 +295,53 @@ function handlePaymentSubmit(e) {
     .finally(() => {
         submitBtn.disabled = false;
     });
-          }
+}
+
+/* ==========================================================================
+   Forum Filtering & Star Interactions
+   ========================================================================== */
+function filterForum(category, element) {
+    document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
+    if (element && element.parentElement) {
+        element.parentElement.classList.add('active');
+    }
+
+    const threads = document.querySelectorAll('.thread-row');
+    threads.forEach(thread => {
+        const threadCat = thread.getAttribute('data-category');
+        if (category === 'all' || threadCat === category) {
+            thread.style.display = 'flex';
+        } else {
+            thread.style.display = 'none';
+        }
+    });
+}
+
+function filterTab(type, element) {
+    const tabs = document.querySelectorAll('.forum-content-header .filter-group:first-child .filter-tab');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    if (element) element.classList.add('active');
+
+    const threads = document.querySelectorAll('.thread-row');
+    threads.forEach(thread => {
+        const isAnswered = thread.getAttribute('data-answered');
+        if (type === 'all') {
+            thread.style.display = 'flex';
+        } else if (type === 'unanswered') {
+            if (isAnswered === 'false') {
+                thread.style.display = 'flex';
+            } else {
+                thread.style.display = 'none';
+            }
+        }
+    });
+}
+
+function toggleStar(starElement) {
+    starElement.classList.toggle('starred');
+    if (starElement.classList.contains('starred')) {
+        showToast("Thread saved/starred!");
+    } else {
+        showToast("Thread unstarred.");
+    }
+    }
