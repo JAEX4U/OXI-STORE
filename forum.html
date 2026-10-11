@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Forum-Specific Custom Styles for Exact Image Layout Matching */
         .forum-wrapper {
             display: grid;
             grid-template-columns: 260px 1fr;
@@ -16,7 +15,6 @@
             text-align: left;
         }
 
-        /* Sidebar Styling */
         .forum-sidebar {
             background: rgba(15, 23, 42, 0.85);
             border: 1px solid rgba(148, 163, 184, 0.15);
@@ -51,6 +49,7 @@
             font-size: 0.9rem;
             border-radius: 8px;
             transition: all 0.2s ease;
+            cursor: pointer;
         }
 
         .category-item.active a,
@@ -65,7 +64,6 @@
             font-size: 0.8rem;
         }
 
-        /* Top Filter Header Bar */
         .forum-content-header {
             display: flex;
             justify-content: space-between;
@@ -89,6 +87,7 @@
             margin-bottom: -13px;
             border-bottom: 2px solid transparent;
             transition: all 0.2s ease;
+            cursor: pointer;
         }
 
         .filter-tab.active,
@@ -97,7 +96,6 @@
             border-bottom-color: #38bdf8;
         }
 
-        /* Thread List Rows */
         .thread-list {
             display: grid;
             gap: 12px;
@@ -188,7 +186,6 @@
             white-space: nowrap;
         }
 
-        /* Bottom Pagination */
         .pagination-container {
             display: flex;
             justify-content: space-between;
@@ -267,12 +264,12 @@
             <aside class="forum-sidebar">
                 <div class="sidebar-title">Categories</div>
                 <ul class="category-list">
-                    <li class="category-item active"><a href="#"><span>All</span> <span class="cat-count">10</span></a></li>
-                    <li class="category-item"><a href="#"><span>📢 Announcements</span> <span class="cat-count"></span></a></li>
-                    <li class="category-item"><a href="#"><span>🛠️ Help & Suggestions</span> <span class="cat-count">4</span></a></li>
-                    <li class="category-item"><a href="#"><span>🏗️ Base Showcases</span> <span class="cat-count"></span></a></li>
-                    <li class="category-item"><a href="#"><span>💰 Economy & Trading</span> <span class="cat-count">1</span></a></li>
-                    <li class="category-item"><a href="#"><span>📜 Directives & Rules</span> <span class="cat-count"></span></a></li>
+                    <li class="category-item active"><a onclick="filterForum('all', this)"><span>All Threads</span> <span class="cat-count" id="count-all">6</span></a></li>
+                    <li class="category-item"><a onclick="filterForum('announcements', this)"><span>📢 Announcements</span> <span class="cat-count" id="count-announcements">1</span></a></li>
+                    <li class="category-item"><a onclick="filterForum('help', this)"><span>🛠️ Help & Suggestions</span> <span class="cat-count" id="count-help">2</span></a></li>
+                    <li class="category-item"><a onclick="filterForum('showcase', this)"><span>🏗️ Base Showcases</span> <span class="cat-count" id="count-showcase">1</span></a></li>
+                    <li class="category-item"><a onclick="filterForum('economy', this)"><span>💰 Economy & Trading</span> <span class="cat-count" id="count-economy">1</span></a></li>
+                    <li class="category-item"><a onclick="filterForum('rules', this)"><span>📜 Directives & Rules</span> <span class="cat-count" id="count-rules">1</span></a></li>
                 </ul>
             </aside>
 
@@ -282,136 +279,136 @@
                 <!-- Top Tabs -->
                 <div class="forum-content-header">
                     <div class="filter-group">
-                        <a href="#" class="filter-tab active">All</a>
-                        <a href="#" class="filter-tab">Unanswered <span style="font-size: 0.75rem; color: #64748b;">12</span></a>
+                        <a class="filter-tab active" onclick="filterTab('all', this)">All Threads</a>
+                        <a class="filter-tab" onclick="filterTab('unanswered', this)">Unanswered <span style="font-size: 0.75rem; color: #64748b;">2</span></a>
                     </div>
 
                     <div class="filter-group">
-                        <a href="#" class="filter-tab active">Latest</a>
-                        <a href="#" class="filter-tab">Popular</a>
+                        <a class="filter-tab active">Latest</a>
+                        <a class="filter-tab">Popular</a>
                     </div>
                 </div>
 
                 <!-- Thread Rows -->
-                <div class="thread-list">
+                <div class="thread-list" id="threadList">
                     
-                    <div class="thread-row">
+                    <div class="thread-row" data-category="help" data-answered="true">
                         <div class="thread-left">
-                            <span class="star-icon">★</span>
+                            <span class="star-icon" onclick="toggleStar(this)">★</span>
                             <div>
                                 <a href="#" class="thread-title">Optimal land claim boundaries to prevent raid loss</a>
                                 <div class="thread-meta">
-                                    <span class="avatar-small">DP</span>
-                                    <span>Daniel Pierce</span>
-                                    <span class="meta-item">📁 Category name</span>
+                                    <span class="avatar-small">SG</span>
+                                    <span>Steve_Gamer</span>
+                                    <span class="meta-item">📁 Help & Suggestions</span>
                                     <span class="meta-item">💬 4</span>
                                 </div>
                             </div>
                         </div>
                         <div class="thread-right">
                             <span>🕒 3 minutes ago</span>
-                            <span class="avatar-small">DP</span>
-                            <span style="color: #cbd5e1;">Daniel Pierce</span>
+                            <span class="avatar-small">SG</span>
+                            <span style="color: #cbd5e1;">Steve_Gamer</span>
                         </div>
                     </div>
 
-                    <div class="thread-row">
+                    <div class="thread-row" data-category="help" data-answered="false">
                         <div class="thread-left">
-                            <span class="star-icon starred">★</span>
+                            <span class="star-icon starred" onclick="toggleStar(this)">★</span>
                             <div>
-                                <a href="#" class="thread-title">Help & Suggestions: Crate Key delivery verification</a>
+                                <a href="#" class="thread-title">Help & Suggestions: Crate Key delivery verification process</a>
                                 <div class="thread-meta">
                                     <span class="avatar-small" style="background:#22c55e;">DP</span>
                                     <span>Daniel Pierce</span>
-                                    <span class="meta-item">📁 Category name</span>
-                                    <span class="meta-item">💬 4</span>
+                                    <span class="meta-item">📁 Help & Suggestions</span>
+                                    <span class="meta-item">💬 0</span>
                                 </div>
                             </div>
                         </div>
                         <div class="thread-right">
-                            <span>🕒 3 minutes ago</span>
+                            <span>🕒 12 minutes ago</span>
                             <span class="avatar-small" style="background:#22c55e;">DP</span>
                             <span style="color: #cbd5e1;">Daniel Pierce</span>
                         </div>
                     </div>
 
-                    <div class="thread-row">
+                    <div class="thread-row" data-category="economy" data-answered="true">
                         <div class="thread-left">
-                            <span class="star-icon">★</span>
+                            <span class="star-icon" onclick="toggleStar(this)">★</span>
                             <div>
                                 <a href="#" class="thread-title">Server Economy Guide: How to maximize /ah earnings</a>
                                 <div class="thread-meta">
-                                    <span class="avatar-small" style="background:#fbbf24; color: #000;">DP</span>
-                                    <span>Daniel Pierce</span>
-                                    <span class="meta-item">📁 Category name</span>
-                                    <span class="meta-item">💬 4</span>
+                                    <span class="avatar-small" style="background:#fbbf24; color: #000;">AP</span>
+                                    <span>Alex_Pro</span>
+                                    <span class="meta-item">📁 Economy & Trading</span>
+                                    <span class="meta-item">💬 18</span>
                                 </div>
                             </div>
                         </div>
                         <div class="thread-right">
-                            <span>🕒 3 minutes ago</span>
-                            <span class="avatar-small" style="background:#fbbf24; color: #000;">DP</span>
-                            <span style="color: #cbd5e1;">Daniel Pierce</span>
+                            <span>🕒 45 minutes ago</span>
+                            <span class="avatar-small" style="background:#fbbf24; color: #000;">AP</span>
+                            <span style="color: #cbd5e1;">Alex_Pro</span>
                         </div>
                     </div>
 
-                    <div class="thread-row">
+                    <div class="thread-row" data-category="announcements" data-answered="true">
                         <div class="thread-left">
-                            <span class="star-icon starred">★</span>
+                            <span class="star-icon starred" onclick="toggleStar(this)">★</span>
                             <div>
-                                <a href="#" class="thread-title">Help & Suggestions: Adding particle trails to Mythic Key drops</a>
+                                <a href="#" class="thread-title">Dioxide SMP Season 1 Opening Broadcast</a>
                                 <div class="thread-meta">
-                                    <span class="avatar-small" style="background:#38bdf8;">DP</span>
-                                    <span>Daniel Pierce</span>
-                                    <span class="meta-item">📁 Category name</span>
-                                    <span class="meta-item">💬 4</span>
+                                    <span class="avatar-small" style="background:#38bdf8;">ES</span>
+                                    <span>END SPY</span>
+                                    <span class="meta-item">📁 Announcements</span>
+                                    <span class="meta-item">💬 32</span>
                                 </div>
                             </div>
                         </div>
                         <div class="thread-right">
-                            <span>🕒 3 minutes ago</span>
-                            <span class="avatar-small" style="background:#38bdf8;">DP</span>
-                            <span style="color: #cbd5e1;">Daniel Pierce</span>
+                            <span>🕒 2 hours ago</span>
+                            <span class="avatar-small" style="background:#38bdf8;">ES</span>
+                            <span style="color: #cbd5e1;">END SPY</span>
                         </div>
                     </div>
 
-                    <div class="thread-row">
+                    <div class="thread-row" data-category="showcase" data-answered="true">
                         <div class="thread-left">
-                            <span class="star-icon">★</span>
+                            <span class="star-icon" onclick="toggleStar(this)">★</span>
                             <div>
                                 <a href="#" class="thread-title">Showcase: Underground Netherite Vault & Automatic Alarms</a>
                                 <div class="thread-meta">
-                                    <span class="avatar-small" style="background:#ec4899;">DP</span>
-                                    <span>Daniel Pierce</span>
-                                    <span class="meta-item">📁 Category name</span>
-                                    <span class="meta-item">💬 4</span>
+                                    <span class="avatar-small" style="background:#ec4899;">M4</span>
+                                    <span>Miner_49er</span>
+                                    <span class="meta-item">📁 Base Showcases</span>
+                                    <span class="meta-item">💬 12</span>
                                 </div>
                             </div>
                         </div>
                         <div class="thread-right">
-                            <span>🕒 3 minutes ago</span>
-                            <span class="avatar-small" style="background:#ec4899;">DP</span>
-                            <span style="color: #cbd5e1;">Daniel Pierce</span>
+                            <span>🕒 5 hours ago</span>
+                            <span class="avatar-small" style="background:#ec4899;">M4</span>
+                            <span style="color: #cbd5e1;">Miner_49er</span>
                         </div>
                     </div>
 
-                    <div class="thread-row">
+                    <div class="thread-row" data-category="rules" data-answered="false">
                         <div class="thread-left">
-                            <span class="star-icon starred">★</span>
+                            <span class="star-icon starred" onclick="toggleStar(this)">★</span>
                             <div>
-                                <a href="#" class="thread-title">Help & Suggestions: Weekly Dragon Arena Event timing poll</a>
+                                <a href="#" class="thread-title">Directives: Updated claim block decay rules for inactive players</a>
                                 <div class="thread-meta">
-                                    <span class="avatar-small" style="background:#a855f7;">DP</span>
-                                    <span>Daniel Pierce</span>
-                                    <span class="meta-item">📁 Category name</span>
-                                    <span class="meta-item">💬 4</span>
+                                    <span class="avatar-small" style="background:#a855f7;">ES</span>
+                                    <span>END SPY</span>
+                                    <span class="meta-item">📁 Directives & Rules</span>
+                                    <span class="meta-item">💬 0</span>
                                 </div>
                             </div>
                         </div>
                         <div class="thread-right">
-                            <span>🕒 3 minutes ago</span>
-                            <span class="avatar-small" style="background:#a855f7;">DP</span>
-                            <span style="color: #cbd5e1;">Daniel Pierce</span>
+                            <span>🕒 1 day ago</span>
+                            <span class="avatar-small" style="background:#a855f7;">ES</span>
+                            <span style="color: #cbd5e1;">END SPY</span>
                         </div>
                     </div>
 
@@ -420,7 +417,7 @@
                 <!-- Bottom Pagination Controls -->
                 <div class="pagination-container">
                     <button class="page-btn">OLDER THREADS</button>
-                    <span class="page-info">PAGE <strong style="color: #f8fafc;">2</strong> OF <strong style="color: #f8fafc;">58</strong></span>
+                    <span class="page-info">PAGE <strong style="color: #f8fafc;">1</strong> OF <strong style="color: #f8fafc;">1</strong></span>
                     <button class="page-btn">NEWER THREADS</button>
                 </div>
 
@@ -447,10 +444,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
-            <div class="footer-brand">
-                ⚡ DIOXIDE STORE                
-            </div>
-
+            <div class="footer-brand">⚡ DIOXIDE STORE</div>
             <div class="footer-buttons">
                 <a href="https://discord.gg/EpnjfuHgjT" target="_blank" class="footer-btn discord-style">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -458,21 +452,27 @@
                     </svg>
                     Join Discord
                 </a>
-                <a href="mailto:dioxsupport@gmail.com" class="footer-btn support-style">
-                    ✉ Support Email
-                </a>
-                <button class="footer-btn ip-style" onclick="copyIP()">
-                    📋 dioxide.pixelforge.gg
-                </button>
+                <a href="mailto:dioxsupport@gmail.com" class="footer-btn support-style">✉ Support Email</a>
+                <button class="footer-btn ip-style" onclick="copyIP()">📋 dioxide.pixelforge.gg</button>
             </div>
-
             <div class="footer-disclaimer">
                 <p>&copy; 2026 Dioxide SMP. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
-</body>
-    </html>
+    <!-- Category & Tab Filtering Script -->
+    <script>
+        function filterForum(category, element) {
+            // Update Active Sidebar Highlight
+            document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
+            if (element) {
+                element.parentElement.classList.add('active');
+            }
+
+            // Filter Thread Rows
+            const threads = document.querySelectorAll('.thread-row');
+            threads.forEach(thread => {
+                if (category === 'all' || thread.getAttribute('data-category') === category) {
+                    thread.style.display = 'flex';
     
