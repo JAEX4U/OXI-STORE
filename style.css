@@ -552,7 +552,7 @@ body::after {
     margin-bottom: 5px;
 }
 
-.form-group input {
+.form-group input, .form-group textarea, .form-group select {
     width: 100%;
     padding: 10px;
     background: #0d1117;
@@ -560,9 +560,10 @@ body::after {
     border-radius: 6px;
     color: #fff;
     font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
 }
 
-.form-group input:focus {
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
     outline: none;
     border-color: #8b5cf6;
 }
@@ -604,33 +605,6 @@ body::after {
 
 .toast-notification.show {
     opacity: 1;
-}
-
-.key-selector {
-    margin-bottom: 15px;
-}
-
-.key-selector label {
-    display: block;
-    font-size: 0.85rem;
-    color: #94a3b8;
-    margin-bottom: 8px;
-}
-
-.key-selector input {
-    width: 100%;
-    padding: 8px;
-    background: #0d1117;
-    border: 1px solid #30363d;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 0.9rem;
-    text-align: center;
-}
-
-.key-selector input:focus {
-    outline: none;
-    border-color: #8b5cf6;
 }
 
 .footer {
@@ -691,7 +665,7 @@ body::after {
 }
 
 /* ==========================================================================
-   Forum Page Styles (New Layout Additions)
+   Forum Page Styles (Fully Responsive & Fixed Overflow)
    ========================================================================== */
 .forum-wrapper {
     display: grid;
@@ -736,6 +710,9 @@ body::after {
     border-radius: 8px;
     transition: all 0.2s ease;
     cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .category-item.active a,
@@ -750,6 +727,25 @@ body::after {
     font-size: 0.8rem;
 }
 
+.create-thread-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.2s;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.create-thread-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
 .forum-content-header {
     display: flex;
     justify-content: space-between;
@@ -757,11 +753,14 @@ body::after {
     border-bottom: 1px solid rgba(148, 163, 184, 0.15);
     padding-bottom: 12px;
     margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .filter-group {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .filter-tab {
@@ -797,6 +796,8 @@ body::after {
     justify-content: space-between;
     gap: 15px;
     transition: transform 0.2s, border-color 0.2s;
+    overflow: hidden;
+    word-break: break-word;
 }
 
 .thread-row:hover {
@@ -807,9 +808,15 @@ body::after {
 
 .thread-left {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 15px;
     flex: 1;
+    min-width: 0;
+}
+
+.thread-content-box {
+    min-width: 0;
+    width: 100%;
 }
 
 .star-icon {
@@ -819,6 +826,9 @@ body::after {
     transition: color 0.2s;
     background: none;
     border: none;
+    padding: 0;
+    margin-top: 2px;
+    flex-shrink: 0;
 }
 
 .star-icon.starred {
@@ -830,8 +840,14 @@ body::after {
     font-size: 1.02rem;
     font-weight: 600;
     text-decoration: none;
-    display: block;
-    margin-bottom: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    max-width: 100%;
+    cursor: pointer;
 }
 
 .thread-title:hover {
@@ -841,9 +857,11 @@ body::after {
 .thread-meta {
     display: flex;
     align-items: center;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 8px 12px;
     color: #94a3b8;
     font-size: 0.82rem;
+    margin-top: 6px;
 }
 
 .avatar-small {
@@ -857,12 +875,14 @@ body::after {
     font-size: 0.65rem;
     font-weight: 800;
     color: #fff;
+    flex-shrink: 0;
 }
 
 .meta-item {
     display: flex;
     align-items: center;
     gap: 5px;
+    white-space: nowrap;
 }
 
 .thread-right {
@@ -872,6 +892,7 @@ body::after {
     color: #64748b;
     font-size: 0.82rem;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .pagination-container {
@@ -905,6 +926,30 @@ body::after {
     font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 0.5px;
+}
+
+/* Reply Box & Modal Styling */
+.reply-box {
+    background: rgba(13, 17, 23, 0.7);
+    border: 1px solid rgba(48, 54, 61, 0.8);
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+}
+
+.reply-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-bottom: 6px;
+}
+
+.reply-text {
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    word-break: break-word;
 }
 
 @media (max-width: 850px) {
@@ -958,17 +1003,6 @@ body::after {
         margin-top: 6px;
     }
 
-    .tabs {
-        gap: 8px;
-        margin-bottom: 20px;
-    }
-
-    .tab-btn {
-        padding: 8px 14px;
-        font-size: 0.8rem;
-        border-radius: 8px;
-    }
-
     .store-grid {
         grid-template-columns: 1fr;
         gap: 15px;
@@ -990,137 +1024,4 @@ body::after {
     }
 
     .badge {
-        font-size: 0.65rem;
-        padding: 4px 10px;
-        top: -10px;
-    }
-
-    .features li {
-        padding: 6px 0;
-        font-size: 0.85rem;
-    }
-
-    .button-group {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .buy-btn, .cart-btn {
-        width: 100%;
-        padding: 10px;
-        font-size: 0.9rem;
-    }
-
-    .modal-content {
-        width: 95%;
-        max-width: 100%;
-        padding: 20px;
-        border-radius: 12px;
-        max-height: 90vh;
-    }
-
-    .modal-content h2 {
-        font-size: 1.2rem;
-    }
-
-    .close-btn {
-        top: 12px;
-        right: 15px;
-        font-size: 1.3rem;
-    }
-
-    .qr-image {
-        width: 150px;
-        height: 150px;
-        margin: 12px 0 3px;
-    }
-
-    .qr-sub {
-        font-size: 0.75rem;
-        margin-bottom: 15px;
-    }
-
-    .cart-items-container {
-        max-height: 300px;
-        margin: 15px 0;
-    }
-
-    .cart-item {
-        padding: 12px;
-        gap: 10px;
-    }
-
-    .cart-item-info h4 {
-        f
-
-
-/* ==========================================================================
-   Fix Mobile Text Overflow & Truncation
-   ========================================================================== */
-.thread-row {
-    overflow: hidden;
-    word-break: break-word;
-}
-
-.thread-title {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.4;
-    max-width: 100%;
-}
-
-.thread-meta {
-    flex-wrap: wrap;
-    gap: 8px 12px;
-    font-size: 0.8rem;
-}
-
-.meta-item {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* "Read More" Button Style */
-.read-more-btn {
-    background: rgba(56, 189, 248, 0.12);
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    color: #38bdf8;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-top: 6px;
-    display: inline-block;
-}
-
-.read-more-btn:hover {
-    background: rgba(56, 189, 248, 0.25);
-    color: #f8fafc;
-}
-
-/* Full Thread View Modal */
-#threadModal .modal-content {
-    text-align: left;
-    max-width: 600px;
-}
-
-#threadModalBody p {
-    color: #cbd5e1;
-    line-height: 1.7;
-    margin-top: 12px;
-    font-size: 0.95rem;
-}
-
-/* Mobile Category List Overflow Fix */
-.category-item a {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-        }
-        
+  
