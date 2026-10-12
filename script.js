@@ -1,487 +1,412 @@
-/* ==========================================================================
-   Configuration & State
-   ========================================================================== */
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUKKj6Hr8xAHyX42avjCDvzL6lYXDUZ-z0lJoytW1_O6dJs_3Cus8WcE0EV1jIcBf0Cw/exec";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dioxide SMP | Forum & Community Hub</title>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Main Global Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-let cart = JSON.parse(localStorage.getItem('storeCart')) || [];
-let currentThreadElement = null;
-let threadReplies = {};
-
-window.addEventListener('load', () => {
-    updateCartUI();
-    
-    // Attach payment form submit listener safely if element exists
-    const payForm = document.getElementById('payForm');
-    if (payForm) {
-        payForm.addEventListener('submit', handlePaymentSubmit);
-    }
-});
-
-/* ==========================================================================
-   Navigation Dropdown Menu
-   ========================================================================== */
-function toggleDropdown() {
-    const dropdown = document.getElementById("navDropdown");
-    if (dropdown) {
-        dropdown.classList.toggle("show");
-    }
-}
-
-// Close dropdown menu when clicking outside
-window.addEventListener("click", function (event) {
-    if (!event.target.closest('.menu-container')) {
-        const dropdowns = document.getElementsByClassName("dropdown-menu");
-        for (let i = 0; i < dropdowns.length; i++) {
-            if (dropdowns[i].classList.contains('show')) {
-                dropdowns[i].classList.remove('show');
-            }
-        }
-    }
-});
-
-/* ==========================================================================
-   Tab Switcher (Ranks / Crate Keys)
-   ========================================================================== */
-function switchTab(tabName, event) {
-    document.querySelectorAll('.store-grid').forEach(grid => grid.classList.remove('active-content'));
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
-    const selectedTab = document.getElementById(tabName);
-    if (selectedTab) {
-        selectedTab.classList.add('active-content');
-    }
-
-    if (event && event.currentTarget) {
-        event.currentTarget.classList.add('active');
-    }
-}
-
-/* ==========================================================================
-   Quantity Validation
-   ========================================================================== */
-function validateQty(input) {
-    let val = parseInt(input.value);
-    if (val > 50) {
-        input.value = 50;
-    } else if (val < 1 || isNaN(val)) {
-        input.value = 1;
-    }
-}
-
-/* ==========================================================================
-   Cart Operations
-   ========================================================================== */
-function addToCart(itemName, price, qty = 1) {
-    const cartItem = {
-        id: Date.now(),
-        name: itemName,
-        price: price,
-        quantity: qty,
-        total: price * qty
-    };
-
-    cart.push(cartItem);
-    localStorage.setItem('storeCart', JSON.stringify(cart));
-    updateCartUI();
-    showToast(`${itemName} added to cart!`);
-}
-
-function addKeyToCart(keyName, unitPrice, inputId) {
-    let qty = parseInt(document.getElementById(inputId).value) || 1;
-    if (qty > 50) qty = 50;
-    if (qty < 1) qty = 1;
-
-    const cartItem = {
-        id: Date.now(),
-        name: `${qty}x ${keyName}`,
-        price: unitPrice,
-        quantity: qty,
-        total: unitPrice * qty
-    };
-
-    cart.push(cartItem);
-    localStorage.setItem('storeCart', JSON.stringify(cart));
-    updateCartUI();
-    showToast(`${qty}x ${keyName} added to cart!`);
-}
-
-function updateCartUI() {
-    const cartCount = document.getElementById('cartCount');
-    if (!cartCount) return;
-
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartCount.innerText = totalItems;
-}
-
-function removeFromCart(itemId) {
-    cart = cart.filter(item => item.id !== itemId);
-    localStorage.setItem('storeCart', JSON.stringify(cart));
-    updateCartUI();
-    displayCartItems();
-    showToast('Item removed from cart');
-}
-
-function displayCartItems() {
-    const cartItemsContainer = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-
-    if (!cartItemsContainer || !cartTotal) return;
-
-    if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
-        cartTotal.style.display = 'none';
-        return;
-    }
-
-    let html = '<div class="cart-items-list">';
-    let totalPrice = 0;
-
-    cart.forEach(item => {
-        html += `
-            <div class="cart-item">
-                <div class="cart-item-info">
-                    <h4>${item.name}</h4>
-                    <p>₹${item.price} × ${item.quantity}</p>
-                    <p class="cart-item-total">Total: ₹${item.total}</p>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">⚡ DIOXIDE FORUM</div>
+        <div class="nav-right">
+            <button class="cart-nav" onclick="openCartModal()">
+                🛒 Cart (<span id="cartCount">0</span>)
+            </button>
+            <div class="menu-container">
+                <button class="hamburger-btn" onclick="toggleDropdown()" aria-label="Toggle Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <div class="dropdown-menu" id="navDropdown">
+                    <a href="index.html">Home</a>
+                    <a href="store.html">Shop</a>
+                    <a href="forum.html">Forum</a>
+                    <a href="help.html">Help</a>
                 </div>
-                <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
             </div>
-        `;
-        totalPrice += item.total;
-    });
+        </div>
+    </nav>
 
-    html += '</div>';
-    cartItemsContainer.innerHTML = html;
-    document.getElementById('totalPrice').innerText = `₹${totalPrice}`;
-    cartTotal.style.display = 'block';
-}
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Forum Content Grid -->
+        <div class="forum-wrapper">
+            <!-- Left Sidebar Categories -->
+            <aside class="forum-sidebar">
+                <h3 class="sidebar-title">Categories</h3>
+                <ul class="category-list">
+                    <li class="category-item active">
+                        <a onclick="filterForum('all', this)">
+                            <span>🌐 All Threads</span>
+                            <span class="cat-count">(24)</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a onclick="filterForum('announcements', this)">
+                            <span>📢 Announcements</span>
+                            <span class="cat-count">(5)</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a onclick="filterForum('help', this)">
+                            <span>🛠️ Help & Suggestions</span>
+                            <span class="cat-count">(8)</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a onclick="filterForum('showcases', this)">
+                            <span>🏗️ Base Showcases</span>
+                            <span class="cat-count">(6)</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a onclick="filterForum('trading', this)">
+                            <span>💰 Economy & Trading</span>
+                            <span class="cat-count">(3)</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a onclick="filterForum('rules', this)">
+                            <span>📜 Directives & Rules</span>
+                            <span class="cat-count">(2)</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
 
-/* ==========================================================================
-   Modals Control
-   ========================================================================== */
-function openCartModal() {
-    displayCartItems();
-    document.getElementById('cartModal').style.display = 'flex';
-}
+            <!-- Right Forum Feed -->
+            <section class="forum-main">
+                <!-- Forum Header / Filter Bar -->
+                <div class="forum-content-header">
+                    <div class="filter-group">
+                        <a class="filter-tab active" onclick="filterTab('all', this)">All Threads</a>
+                        <a class="filter-tab" onclick="filterTab('unanswered', this)">Unanswered</a>
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-tab active" onclick="showToast('Showing Latest Threads')">Latest</span>
+                        <span class="filter-tab" onclick="showToast('Showing Popular Threads')">Popular</span>
+                    </div>
+                </div>
 
-function closeCartModal() {
-    document.getElementById('cartModal').style.display = 'none';
-}
+                <!-- Thread Rows List -->
+                <div class="thread-list" id="threadList">
+                    
+                    <!-- Thread Item 1 -->
+                    <article class="thread-row" data-category="announcements" data-answered="true">
+                        <div class="thread-left">
+                            <button class="star-icon" onclick="toggleStar(this)" title="Bookmark Thread">★</button>
+                            <div class="thread-content-box">
+                                <a href="javascript:void(0)" class="thread-title" onclick="openThreadModal(this, '[UPDATE] Season 4 Patch 4.2 - Nether Revamp & Custom Enchants', 'Admin_Apex', '📢 Announcements', 'This update introduces the complete Nether Revamp, brand new Custom Enchants, revamped boss drop tables, and balance changes across all ranks!')">[UPDATE] Season 4 Patch 4.2 - Nether Revamp & Custom Enchants</a>
+                                <div class="thread-meta">
+                                    <span class="avatar-small">A</span>
+                                    <span style="color: #c084fc; font-weight: 700;">Admin_Apex</span>
+                                    <span>•</span>
+                                    <span style="color: #38bdf8;">📢 Announcements</span>
+                                    <span>•</span>
+                                    <span>2 hours ago</span>
+                                    <span>•</span>
+                                    <span class="reply-count">💬 18 replies</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="thread-right">
+                            <button class="like-btn" onclick="toggleLike(this)">❤️ <span class="like-count">14</span></button>
+                        </div>
+                    </article>
 
-function checkoutCart() {
-    if (cart.length === 0) {
-        alert('Your cart is empty!');
-        return;
-    }
+                    <!-- Thread Item 2 -->
+                    <article class="thread-row" data-category="rules" data-answered="true">
+                        <div class="thread-left">
+                            <button class="star-icon" onclick="toggleStar(this)" title="Bookmark Thread">★</button>
+                            <div class="thread-content-box">
+                                <a href="javascript:void(0)" class="thread-title" onclick="openThreadModal(this, 'Server Rules & Punishment Directives [Updated 2026]', 'Mod_Kira', '📜 Directives & Rules', 'Official server directives covering PvP boundaries, claim block expiration schedules, and chat misconduct rules.')">Server Rules & Punishment Directives [Updated 2026]</a>
+                                <div class="thread-meta">
+                                    <span class="avatar-small" style="background:#ef4444;">M</span>
+                                    <span style="color: #f87171; font-weight: 700;">Mod_Kira</span>
+                                    <span>•</span>
+                                    <span style="color: #facc15;">📜 Directives & Rules</span>
+                                    <span>•</span>
+                                    <span>1 day ago</span>
+                                    <span>•</span>
+                                    <span class="reply-count">💬 45 replies</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="thread-right">
+                            <button class="like-btn" onclick="toggleLike(this)">❤️ <span class="like-count">29</span></button>
+                        </div>
+                    </article>
 
-    const totalPrice = cart.reduce((sum, item) => sum + item.total, 0);
-    const itemSummary = cart.map(item => `${item.name} (₹${item.total})`).join(', ');
+                    <!-- Thread Item 3 -->
+                    <article class="thread-row" data-category="help" data-answered="false">
+                        <div class="thread-left">
+                            <button class="star-icon" onclick="toggleStar(this)" title="Bookmark Thread">★</button>
+                            <div class="thread-content-box">
+                                <a href="javascript:void(0)" class="thread-title" onclick="openThreadModal(this, 'How do I claim land in the new Colossal Biome expansion?', 'NoobBuilder99', '🛠️ Help & Suggestions', 'I visited the new biome expansion but my claim shovel says land is restricted. Is there a command required?')">How do I claim land in the new Colossal Biome expansion?</a>
+                                <div class="thread-meta">
+                                    <span class="avatar-small" style="background:#3b82f6;">N</span>
+                                    <span>NoobBuilder99</span>
+                                    <span>•</span>
+                                    <span style="color: #60a5fa;">🛠️ Help & Suggestions</span>
+                                    <span>•</span>
+                                    <span>3 hours ago</span>
+                                    <span>•</span>
+                                    <span class="reply-count">💬 0 replies</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="thread-right">
+                            <button class="like-btn" onclick="toggleLike(this)">❤️ <span class="like-count">3</span></button>
+                        </div>
+                    </article>
 
-    document.getElementById('modalItemTitle').innerText = `Items: ${itemSummary} | Total: ₹${totalPrice}`;
-    document.getElementById('selectedItem').value = itemSummary + ` | Total: ₹${totalPrice}`;
+                </div>
 
-    let summaryHTML = '<h4 style="margin-bottom: 15px; text-align: left;">Order Summary:</h4>';
-    cart.forEach(item => {
-        summaryHTML += `<div class="summary-item"><span>${item.name}</span><span>₹${item.total}</span></div>`;
-    });
-    summaryHTML += `<div class="summary-total"><span>Total:</span><span>₹${totalPrice}</span></div>`;
-    document.getElementById('cartSummary').innerHTML = summaryHTML;
+                <!-- Pagination Controls -->
+                <div class="pagination-container">
+                    <button class="page-btn" onclick="showToast('Already on first page')">OLDER THREADS</button>
+                    <span class="page-info">PAGE 1 OF 1</span>
+                    <button class="page-btn" onclick="showToast('No newer threads available')">NEWER THREADS</button>
+                </div>
+            </section>
+        </div>
+    </main>
 
-    closeCartModal();
-    document.getElementById('paymentModal').style.display = 'flex';
-}
+    <!-- Modal: Open Thread & Reply Modal -->
+    <div id="threadModal" class="modal">
+        <div class="modal-content modal-wide">
+            <span class="close-btn" onclick="closeThreadModal()">&times;</span>
+            <span id="modalCategoryBadge" class="badge badge-static">Category</span>
+            <h2 id="modalThreadTitle" class="modal-thread-title">Thread Title</h2>
+            <p id="modalThreadAuthor" class="modal-thread-author">Posted by User</p>
+            
+            <div class="thread-body-box">
+                <p id="modalThreadContent" class="thread-body-text">Thread content text will appear here...</p>
+            </div>
 
-function openCheckout(itemName, price) {
-    const itemFullString = `${itemName} (₹${price})`;
-    document.getElementById('modalItemTitle').innerText = `Item: ${itemFullString}`;
-    document.getElementById('selectedItem').value = itemFullString;
-    document.getElementById('cartSummary').innerHTML = `
-        <div class="summary-item"><span>${itemName}</span><span>₹${price}</span></div>
-        <div class="summary-total"><span>Total:</span><span>₹${price}</span></div>
-    `;
-    document.getElementById('paymentModal').style.display = 'flex';
-}
+            <!-- Replies Section -->
+            <div class="replies-section">
+                <h3 class="replies-heading">💬 Replies (<span id="replyCountHeader">0</span>)</h3>
+                <div id="replyContainer" class="reply-container">
+                    <!-- Live replies render here -->
+                </div>
+            </div>
 
-function openKeyCheckout(keyName, unitPrice, inputId) {
-    let qty = parseInt(document.getElementById(inputId).value) || 1;
-    if (qty > 50) qty = 50;
-    if (qty < 1) qty = 1;
+            <!-- Add Reply Form -->
+            <form id="replyForm" class="reply-form" onsubmit="submitReply(event)">
+                <div class="form-group compact-group">
+                    <input type="text" id="replyAuthor" placeholder="Your Minecraft Username" required>
+                </div>
+                <div class="form-group compact-group">
+                    <textarea id="replyText" class="form-textarea" rows="2" placeholder="Write your response..." required></textarea>
+                </div>
+                <button type="submit" class="submit-reply-btn">Submit Reply</button>
+            </form>
+        </div>
+    </div>
 
-    const totalPrice = unitPrice * qty;
-    const itemFullString = `${qty}x ${keyName} - Total: ₹${totalPrice}`;
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCartModal()">&times;</span>
+            <h2>🛒 Your Shopping Cart</h2>
+            <div id="cartItems" class="cart-items-container">
+                <p class="empty-cart">Your cart is empty</p>
+            </div>
+            <div id="cartTotal" class="cart-total" style="display: none;">
+                <h3>Total: <span id="totalPrice">₹0</span></h3>
+                <button class="checkout-all-btn" onclick="checkoutCart()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
 
-    document.getElementById('modalItemTitle').innerText = `Item: ${itemFullString}`;
-    document.getElementById('selectedItem').value = itemFullString;
-    document.getElementById('cartSummary').innerHTML = `
-        <div class="summary-item"><span>${qty}x ${keyName}</span><span>₹${totalPrice}</span></div>
-        <div class="summary-total"><span>Total:</span><span>₹${totalPrice}</span></div>
-    `;
-    document.getElementById('paymentModal').style.display = 'flex';
-}
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCheckout()">&times;</span>
+            <h2>Complete Payment</h2>
+            <p id="modalItemTitle" style="color: #8b5cf6; font-weight: bold; margin-top: 5px;"></p>
+            
+            <img src="https://placehold.co/200x200/0d1117/8b5cf6?text=UPI+QR+CODE" alt="UPI QR Code" class="qr-image">
+            <p class="qr-sub">Scan with GPay / PhonePe / Paytm / Any UPI App</p>
 
-function closeCheckout() {
-    document.getElementById('paymentModal').style.display = 'none';
-    document.getElementById('msg').innerText = '';
-    const payForm = document.getElementById('payForm');
-    if (payForm) payForm.reset();
-}
+            <div id="cartSummary" class="cart-summary"></div>
 
-/* ==========================================================================
-   Utilities & Notifications
-   ========================================================================== */
-function copyIP() {
-    navigator.clipboard.writeText("dioxide.pixelforge.gg");
-    showToast("Server IP copied: dioxide.pixelforge.gg");
-}
+            <form id="payForm">
+                <input type="hidden" id="selectedItem">
+                <div class="form-group">
+                    <label for="username">Minecraft Username:</label>
+                    <input type="text" id="username" required placeholder="e.g. Steve_Official">
+                </div>
+                <div class="form-group">
+                    <label for="utr">12-Digit UTR / Transaction ID:</label>
+                    <input type="text" id="utr" pattern="\d{12}" required placeholder="e.g. 312345678901" maxlength="12">
+                </div>
+                <button type="submit" id="submitBtn">Verify Payment</button>
+            </form>
+            <p id="msg"></p>
+        </div>
+    </div>
 
-function showToast(message) {
-    let toast = document.querySelector('.toast-notification');
-    
-    if (!toast) {
-        toast = document.createElement('div');
-        toast.className = 'toast-notification';
-        document.body.appendChild(toast);
-    }
-    
-    toast.innerText = message;
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-buttons">
+            <a href="https://discord.gg/EpnjfuHgjT" target="_blank" rel="noopener" class="footer-btn discord-style">
+                💬 Join Discord
+            </a>
+            <a href="mailto:support@dioxide.pixelforge.gg" class="footer-btn support-style">
+                ✉ Support Email
+            </a>
+            <button class="footer-btn ip-style" onclick="copyIP()">
+                📋 dioxide.pixelforge.gg
+            </button>
+        </div>
+        <p style="margin-top: 25px; color: #64748b; font-size: 0.82rem;">
+            &copy; 2026 Dioxide SMP. All rights reserved.
+        </p>
+    </footer>
 
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 100);
+    <!-- Forum Interactive Features Script -->
+    <script>
+        let currentThreadElement = null;
+        let threadReplies = {};
 
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 2500);
-}
+        function filterForum(category, element) {
+            document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
+            if (element && element.parentElement) {
+                element.parentElement.classList.add('active');
+            }
 
-/* ==========================================================================
-   Google Sheet Form Submission Handler
-   ========================================================================== */
-function handlePaymentSubmit(e) {
-    e.preventDefault();
-
-    const submitBtn = document.getElementById('submitBtn');
-    const msg = document.getElementById('msg');
-
-    submitBtn.disabled = true;
-    msg.style.color = "#eab308";
-    msg.innerText = "Logging payment...";
-
-    const payload = {
-        username: document.getElementById('username').value,
-        utr: document.getElementById('utr').value,
-        item: document.getElementById('selectedItem').value
-    };
-
-    fetch(GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(payload)
-    })
-    .then(() => {
-        msg.style.color = "#22c55e";
-        msg.innerText = "Bill logged! Staff will verify your UTR shortly.";
-        document.getElementById('payForm').reset();
-
-        cart = [];
-        localStorage.setItem('storeCart', JSON.stringify(cart));
-        updateCartUI();
-
-        setTimeout(closeCheckout, 3000);
-    })
-    .catch(err => {
-        console.error(err);
-        msg.style.color = "#ef4444";
-        msg.innerText = "Error logging bill. Please try again.";
-    })
-    .finally(() => {
-        submitBtn.disabled = false;
-    });
-}
-
-/* ==========================================================================
-   Forum Filtering & Interactive Thread Controls
-   ========================================================================== */
-function filterForum(category, element) {
-    document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
-    if (element && element.parentElement) {
-        element.parentElement.classList.add('active');
-    }
-
-    const threads = document.querySelectorAll('.thread-row');
-    threads.forEach(thread => {
-        const threadCat = thread.getAttribute('data-category');
-        if (category === 'all' || threadCat === category) {
-            thread.style.display = 'flex';
-        } else {
-            thread.style.display = 'none';
+            const threads = document.querySelectorAll('.thread-row');
+            threads.forEach(thread => {
+                const threadCat = thread.getAttribute('data-category');
+                if (category === 'all' || threadCat === category) {
+                    thread.style.display = 'flex';
+                } else {
+                    thread.style.display = 'none';
+                }
+            });
         }
-    });
-}
 
-function filterTab(type, element) {
-    const tabs = document.querySelectorAll('.forum-content-header .filter-group:first-child .filter-tab');
-    tabs.forEach(tab => tab.classList.remove('active'));
-    if (element) element.classList.add('active');
+        function filterTab(type, element) {
+            const tabs = document.querySelectorAll('.filter-group .filter-tab');
+            tabs.forEach(tab => {
+                if (tab.textContent.includes('All Threads') || tab.textContent.includes('Unanswered')) {
+                    tab.classList.remove('active');
+                }
+            });
+            if (element) element.classList.add('active');
 
-    const threads = document.querySelectorAll('.thread-row');
-    threads.forEach(thread => {
-        const isAnswered = thread.getAttribute('data-answered');
-        if (type === 'all') {
-            thread.style.display = 'flex';
-        } else if (type === 'unanswered') {
-            if (isAnswered === 'false') {
-                thread.style.display = 'flex';
+            const threads = document.querySelectorAll('.thread-row');
+            threads.forEach(thread => {
+                const isAnswered = thread.getAttribute('data-answered');
+                if (type === 'all') {
+                    thread.style.display = 'flex';
+                } else if (type === 'unanswered') {
+                    if (isAnswered === 'false') {
+                        thread.style.display = 'flex';
+                    } else {
+                        thread.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        function toggleStar(starBtn) {
+            starBtn.classList.toggle('starred');
+            if (starBtn.classList.contains('starred')) {
+                showToast("Thread saved/starred!");
             } else {
-                thread.style.display = 'none';
+                showToast("Thread unstarred.");
             }
         }
-    });
-}
 
-function toggleStar(starElement) {
-    starElement.classList.toggle('starred');
-    if (starElement.classList.contains('starred')) {
-        showToast("Thread saved/starred!");
-    } else {
-        showToast("Thread unstarred.");
-    }
-}
-
-// New Thread Modal
-function openNewThreadModal() {
-    const modal = document.getElementById('newThreadModal');
-    if (modal) modal.style.display = 'flex';
-}
-
-function closeNewThreadModal() {
-    const modal = document.getElementById('newThreadModal');
-    if (modal) modal.style.display = 'none';
-    const form = document.getElementById('newThreadForm');
-    if (form) form.reset();
-}
-
-function submitNewThread(e) {
-    e.preventDefault();
-    const author = document.getElementById('postAuthor').value;
-    const category = document.getElementById('postCategory').value;
-    const title = document.getElementById('postTitle').value;
-    const body = document.getElementById('postBody').value;
-
-    const categoryLabels = {
-        'announcements': '📢 Announcements',
-        'help': '🛠️ Help & Suggestions',
-        'showcase': '🏗️ Base Showcases',
-        'economy': '💰 Economy & Trading',
-        'rules': '📜 Directives & Rules'
-    };
-
-    const threadList = document.getElementById('threadList');
-    if (!threadList) return;
-
-    const newRow = document.createElement('article');
-    newRow.className = 'thread-row';
-    newRow.setAttribute('data-category', category);
-    newRow.setAttribute('data-answered', 'false');
-
-    const initial = author.charAt(0).toUpperCase();
-
-    newRow.innerHTML = `
-        <div class="thread-left">
-            <button class="star-icon" onclick="toggleStar(this)">★</button>
-            <div class="thread-content-box">
-                <div class="thread-title" onclick="openThreadModal(this, '${title}', '${author}', '${categoryLabels[category]}', '${body}')">${title}</div>
-                <div class="thread-meta">
-                    <span class="avatar-small">${initial}</span>
-                    <span style="color:#a78bfa; font-weight:700;">${author}</span>
-                    <span>•</span>
-                    <span>${categoryLabels[category]}</span>
-                    <span>•</span>
-                    <span class="reply-count">💬 0 replies</span>
-                </div>
-                <button class="read-more-btn" onclick="openThreadModal(this.parentElement, '${title}', '${author}', '${categoryLabels[category]}', '${body}')" style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); color: #38bdf8; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; margin-top: 8px;">📖 Read & Reply</button>
-            </div>
-        </div>
-        <div class="thread-right">
-            <span>Just now</span>
-        </div>
-    `;
-
-    threadList.prepend(newRow);
-    closeNewThreadModal();
-    showToast('Thread posted successfully!');
-}
-
-// Read & Reply Thread Modal
-function openThreadModal(element, title, author, category, content) {
-    currentThreadElement = element.closest('.thread-row');
-    
-    document.getElementById('modalThreadTitle').innerText = title;
-    document.getElementById('modalThreadAuthor').innerText = `Posted by ${author}`;
-    document.getElementById('modalCategoryBadge').innerText = category;
-    document.getElementById('modalThreadContent').innerText = content;
-
-    renderReplies(title);
-    document.getElementById('threadModal').style.display = 'flex';
-}
-
-function closeThreadModal() {
-    document.getElementById('threadModal').style.display = 'none';
-    const replyForm = document.getElementById('replyForm');
-    if (replyForm) replyForm.reset();
-}
-
-function renderReplies(threadTitle) {
-    const replyContainer = document.getElementById('replyContainer');
-    if (!replyContainer) return;
-
-    const replies = threadReplies[threadTitle] || [];
-    
-    const replyCountHeader = document.getElementById('replyCountHeader');
-    if (replyCountHeader) replyCountHeader.innerText = replies.length;
-
-    if (replies.length === 0) {
-        replyContainer.innerHTML = '<p style="color: #64748b; font-size: 0.85rem; font-style: italic;">No replies yet. Be the first to respond!</p>';
-    } else {
-        replyContainer.innerHTML = replies.map(r => `
-            <div class="reply-box">
-                <div class="reply-header">
-                    <strong style="color: #38bdf8;">${r.author}</strong>
-                    <span>${r.time}</span>
-                </div>
-                <div class="reply-text">${r.text}</div>
-            </div>
-        `).join('');
-    }
-}
-
-function submitReply(e) {
-    e.preventDefault();
-    const title = document.getElementById('modalThreadTitle').innerText;
-    const author = document.getElementById('replyAuthor').value;
-    const text = document.getElementById('replyText').value;
-
-    if (!threadReplies[title]) {
-        threadReplies[title] = [];
-    }
-
-    threadReplies[title].push({
-        author: author,
-        text: text,
-        time: 'Just now'
-    });
-
-    renderReplies(title);
-    document.getElementById('replyText').value = '';
-
-    if (currentThreadElement) {
-        const countBadge = currentThreadElement.querySelector('.reply-count');
-        if (countBadge) {
-            countBadge.innerText = `💬 ${threadReplies[title].length} replies`;
+        function toggleLike(likeBtn) {
+            likeBtn.classList.toggle('liked');
+            const countSpan = likeBtn.querySelector('.like-count');
+            let count = parseInt(countSpan.innerText);
+            if (likeBtn.classList.contains('liked')) {
+                count += 1;
+                showToast("Thread liked!");
+            } else {
+                count -= 1;
+                showToast("Like removed.");
+            }
+            countSpan.innerText = count;
         }
-        currentThreadElement.setAttribute('data-answered', 'true');
-    }
 
-    showToast('Reply added!');
-       }
-                   
+        function openThreadModal(element, title, author, category, content) {
+            currentThreadElement = element.closest('.thread-row');
+            
+            document.getElementById('modalThreadTitle').innerText = title;
+            document.getElementById('modalThreadAuthor').innerText = `Posted by ${author}`;
+            document.getElementById('modalCategoryBadge').innerText = category;
+            document.getElementById('modalThreadContent').innerText = content;
+
+            renderReplies(title);
+            document.getElementById('threadModal').style.display = 'flex';
+        }
+
+        function closeThreadModal() {
+            document.getElementById('threadModal').style.display = 'none';
+            const replyForm = document.getElementById('replyForm');
+            if (replyForm) replyForm.reset();
+        }
+
+        function renderReplies(threadTitle) {
+            const replyContainer = document.getElementById('replyContainer');
+            if (!replyContainer) return;
+
+            const replies = threadReplies[threadTitle] || [];
+            const replyCountHeader = document.getElementById('replyCountHeader');
+            if (replyCountHeader) replyCountHeader.innerText = replies.length;
+
+            if (replies.length === 0) {
+                replyContainer.innerHTML = '<p style="color: #64748b; font-size: 0.85rem; font-style: italic;">No replies yet. Be the first to respond!</p>';
+            } else {
+                replyContainer.innerHTML = replies.map(r => `
+                    <div class="reply-box">
+                        <div class="reply-header">
+                            <strong style="color: #38bdf8;">${r.author}</strong>
+                            <span>${r.time}</span>
+                        </div>
+                        <div class="reply-text">${r.text}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function submitReply(e) {
+            e.preventDefault();
+            const title = document.getElementById('modalThreadTitle').innerText;
+            const author = document.getElementById('replyAuthor').value;
+            const text = document.getElementById('replyText').value;
+
+            if (!threadReplies[title]) {
+                threadReplies[title] = [];
+            }
+
+            threadReplies[title].push({
+                author: author,
+                text: text,
+                time: 'Just now'
+            });
+
+            renderReplies(title);
+            document.getElementById('replyText').value = '';
+
+            if (currentThreadElement) {
+                const countBadge = currentThreadElement.querySelector('.reply-count');
+                if (countBadge) {
+                    countBadge.innerText = `💬 ${threadReplies[title].length} replies`;
+                }
+                currentThreadElement.s
